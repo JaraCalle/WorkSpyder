@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from exploreFairs import views as exploreFairsViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', exploreFairsViews.view_fairs, name='main'),
 ]
