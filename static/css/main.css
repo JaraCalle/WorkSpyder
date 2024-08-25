@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #f0f8ff;
+    --bg-color: #f3faf8;
     --light-white: #E4E9ED;
     --general-font: "Palanquin";
     --txt-weight: 300;
@@ -12,6 +12,7 @@
     font-weight: var(--txt-weight);
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     a, button {
         all: unset;
     }
@@ -19,6 +20,7 @@
 
 body {
     background-color: var(--bg-color);
+    overscroll-behavior: none;
 }
 
 .flex {
@@ -103,4 +105,4 @@ body {
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-  }
+}

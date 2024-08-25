@@ -1,5 +1,23 @@
 {% extends "base.html" %}
-{% block title %}WorkSpyder - Ferias de empleo{% endblock title %}
-{% block content %}
 
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/home-page.css' %}">
+{% endblock links %}
+
+{% block title %}WorkSpyder - Ferias de empleo{% endblock title %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-container">
+        <div class="header">
+            <h1>¿Buscando eventos?</h1>
+            <input type="text" name="" id="">
+        </div>
+    </div>
+    <div class="glassy-overlay"></div>
+    <canvas></canvas>
+    <script src="{% static 'js/home-page.js' %}"></script>
+</div>
 {% endblock content %}
