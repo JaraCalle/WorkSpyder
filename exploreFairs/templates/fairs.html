@@ -3,7 +3,9 @@
 {% load static %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'css/home-page.css' %}">
+<link rel="stylesheet" href="{% static 'css/hero-section.css' %}">
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 {% endblock links %}
 
 {% block title %}WorkSpyder - Ferias de empleo{% endblock title %}
@@ -13,11 +15,22 @@
     <div class="hero-container">
         <div class="header">
             <h1>¿Buscando eventos?</h1>
-            <input type="text" name="" id="">
+            <form action="">
+                <input type="search" placeholder="Encuentralos acá...">
+                <i class="fa fa-search"></i>
+            </form>
         </div>
     </div>
     <div class="glassy-overlay"></div>
     <canvas></canvas>
-    <script src="{% static 'js/home-page.js' %}"></script>
+    <script src="{% static 'js/hero-section.js' %}"></script>
+</div>
+<div>
+    <section class="main-container">
+        
+    </section>
+    <section class="main-container">
+        
+    </section>
 </div>
 {% endblock content %}

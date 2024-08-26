@@ -1,6 +1,8 @@
 :root {
     --bg-color: #f3faf8;
     --light-white: #E4E9ED;
+    --default-btn-color: #349885;
+    --hover-btn-color: #277a6b;
     --general-font: "Palanquin";
     --txt-weight: 300;
     --medium-weight: 500;
