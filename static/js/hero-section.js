@@ -96,5 +96,5 @@ function update(t) {
 
 function setupCanvas() {
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight * 0.4;
+    canvas.height = window.innerHeight * 0.3;
 }

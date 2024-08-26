@@ -1,0 +1,44 @@
+.principal-content-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 5%;
+}
+
+.main-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 30px;
+    gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-fair {
+    background-color: var(--bg-color);
+    box-shadow: rgba(0, 0, 0, 0.2) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.img-card-container {
+    width: 15rem;
+    height: 15rem;
+    top: 0;
+    left: 0;
+}
+
+.img-card-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.data-card-container {
+    padding: 10px 5%;
+}
+
+.data-card-container h1 {
+
+}
