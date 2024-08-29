@@ -1,8 +1,10 @@
 :root {
     --bg-color: #f3faf8;
     --light-white: #E4E9ED;
-    --default-btn-color: #349885;
+    --default-btn-color: #349885; 
     --hover-btn-color: #277a6b;
+    --active-btn-color: #236258; 
+    --darker-green: #091c1a;
     --general-font: "Palanquin";
     --txt-weight: 300;
     --medium-weight: 500;
@@ -14,6 +16,7 @@
     font-weight: var(--txt-weight);
     margin: 0;
     padding: 0;
+    color: var(--darker-green);
     box-sizing: border-box;
     a, button {
         all: unset;
