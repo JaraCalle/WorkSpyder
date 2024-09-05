@@ -46,7 +46,7 @@
 }
 
 .fairs-principal-container {
-    width: 70rem;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -55,10 +55,14 @@
     font-weight: var(--medium-weight);
 }
 
+.data-card-container p {
+    color: var(--active-btn-color);
+}
 
 .btn-2 {
     scale: 1;
     padding: 0 50px;
+    margin-top: 1rem;
     height: 32px;
     background: var(--default-btn-color);
     color: white;

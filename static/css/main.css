@@ -67,6 +67,12 @@ body {
     font-size: 1rem;
 }
 
+@media (max-width: 768px) {
+    .nav-event.nav-btn {
+        display: none;
+    }
+}
+
 .nav-user {
     gap: 10px;
 }
