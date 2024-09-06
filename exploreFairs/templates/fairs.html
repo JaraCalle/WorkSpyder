@@ -31,16 +31,21 @@
         Filtros
     </section>
     <section class="main-container fairs-principal-container flex">
-        <div class="card-fair">
-            <div class="img-card-container">
-                <img src="{% static 'images/TEST-IMG-2.jpg'%}" alt="">
+        {% for fair in fairs %}
+            <div class="card-fair">
+                <div class="img-card-container">
+                    <!-- Usa fair.image.url para acceder a la URL de la imagen cargada -->
+                    <img src="{{ fair.image.url }}" alt="{{ fair.title }}">
+                </div>
+                <div class="data-card-container">
+                    <h1>{{ fair.title }}</h1>
+                    <p>{{ fair.event_date|date:"d M Y" }}</p>
+                    <button class="btn-2" onclick="window.location.href='{% url 'fair' fair.id %}'">Inscribirme</button>
+                </div>
             </div>
-            <div class="data-card-container">
-                <h1>World Tech Meeting</h1>
-                <p>12 Sept 2024</p>
-                <button class="btn-2">Inscribirme</button>
-            </div>
-        </div>
+        {% empty %}
+            <p>No hay ferias disponibles en este momento.</p>
+        {% endfor %}
     </section>
 </div>
 {% endblock content %}

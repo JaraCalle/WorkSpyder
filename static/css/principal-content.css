@@ -43,6 +43,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center; /* Asegura que el texto esté centrado en el contenedor */
 }
 
 .fairs-principal-container {
@@ -50,48 +51,14 @@
     justify-content: center;
     align-items: center;
 }
-
 .data-card-container h1 {
     font-weight: var(--medium-weight);
+    font-size: 1rem; /* Ajusta según sea necesario */
+    width: 10rem; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 .data-card-container p {
     color: var(--active-btn-color);
-}
-
-.btn-2 {
-    scale: 1;
-    padding: 0 50px;
-    margin-top: 1rem;
-    height: 32px;
-    background: var(--default-btn-color);
-    color: white;
-    border: none;
-    border-radius: 32px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-2:after {
-    content: "";
-    background: var(--hover-btn-color);
-    position: absolute;
-    z-index: -1;
-    left: -20%;
-    right: -20%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.5s;
-}
-
-.btn-2:hover:after {
-    transform: skewX(-45deg) scale(1, 1);
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
 }
