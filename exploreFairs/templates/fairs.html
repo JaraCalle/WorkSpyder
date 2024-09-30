@@ -28,7 +28,7 @@
 </div>
 <div class="principal-content-container">
     <section class="main-container" style="justify-content:center">
-        <button type="button" class="btn-2" onclick="toggleFilters()">Filtros de búsqueda</button> <!-- Botón para colapsar -->
+        <button type="button" class="btn-secondary" onclick="toggleFilters()">Filtros de búsqueda</button> <!-- Botón para colapsar -->
         <div id="filterSection" class="collapsible">
             <form class="filter-form" method="GET" action="{% url 'view_fairs' %}">
                 <div class="filter-items-container">
@@ -45,7 +45,7 @@
                         <input type="text" name="organizer" placeholder="Organizador" value="{{ request.GET.organizer }}">
                     </div>
                 </div>
-                <button type="submit" class="btn-2">Aplicar filtros</button>
+                <button type="submit" class="btn-primary">Aplicar filtros</button>
             </form>
         </div>
     </section>
@@ -59,7 +59,7 @@
                 <div class="data-card-container">
                     <h1>{{ fair.title }}</h1>
                     <p>{{ fair.event_date|date:"d M Y" }}</p>
-                    <button class="btn-2" onclick="window.location.href='{% url 'fair' fair.id %}'">Inscribirme</button>
+                    <button class="btn-primary" onclick="window.location.href='{% url 'fair' fair.id %}'">Inscribirme</button>
                 </div>
             </div>
         {% empty %}
