@@ -19,6 +19,10 @@
                 <img src="{% static 'images/WorkSpyder-logo.svg' %}" alt="WorkSpyder">
                 <h1>WorkSpyder</h1>
             </section>
+            <form method="POST" action="{% url 'auth:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Cerrar sesión</button>
+            </form>
             <div class="nav-right-elements flex">
                 <a class="nav-event nav-btn" href="">
                     Pon tu evento en WorkSpyder

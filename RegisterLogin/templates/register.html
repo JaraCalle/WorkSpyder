@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock links %}
+
+{% block content %}
+<div class="event-card-container flex" style="height: 80vh;">
+    <div class="event-card form-container">
+        <h1>Registrarse</h1>
+        <form class="form" method="post">  
+            {% csrf_token %}
+            {{ form.as_p}}
+
+            <button type="submit" id="submit" class="btn-primary">Registrarse</button>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="notification {{ message.tags}}">
+                {{ message }}
+            </div>
+            {% endfor%}
+        {% endif %}
+        <p class="disclaimer-p">¿Ya tienes una cuenta? Haz click <a href="{% url "auth:register" %}">Aquí</a></p>
+    </div>
+</div>
+
+
+{% endblock content %}

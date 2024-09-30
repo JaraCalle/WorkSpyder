@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock links %}
+
+{% block content %}
+<div class="event-card-container flex" style="height: 80vh;">
+    <div class="event-card form-container">
+        <h1>Inicio de sesión</h1>
+        <form class="form" method="post">  
+            {% csrf_token %}
+            {{ form.as_p}}
+        
+            <button type="submit" id="submit" class="btn-primary">Iniciar sesión</button>
+        </form>
+        <p class="disclaimer-p">¿No tienes una cuenta? Haz click <a href="{% url "auth:register" %}">Aquí</a> y crea una</p>
+    </div>
+</div>
+{% endblock %}
