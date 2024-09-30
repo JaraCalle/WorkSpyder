@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock links %}
+
+{% block title %}WorkSpyder - Manejador de Ferias{% endblock title %}
+
+{% block content %}
+  <h1>Bienvenido al manejador de ferias de WorkSpyder</h1>
+  <h4>Selecciona que deseas realizar</h4>
+  <div class="optionSelect">
+    <ul>
+      <li><a href="{% url 'add_fair' %}" target="_self">CREAR UNA FERIA</a></li>
+      <li><a href="{% url 'edit_fair' %}" target="_self">EDITAR UNA FERIA</a></li>
+    </ul>
+  </div>
+{% endblock content %}

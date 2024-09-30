@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock links %}
+
+{% block title %}WorkSpyder - Crear Nueva Feria{% endblock title %}
+
+{% block content %}
+	<h2>Crear una feria nueva</h2>
+	<div>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<br>
+			<button type="submit" class="btn-2">¡Publicar!</button>
+		</form>
+	</div>
+{% endblock content %}

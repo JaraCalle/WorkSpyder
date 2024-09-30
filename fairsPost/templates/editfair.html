@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock links %}
+
+{% block title %}WorkSpyder - Editar Feria{% endblock title %}
+
+{% block content %}
+	<h2>Editar una feria</h2>
+	<div>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }} 
+			<button type="submit" class="btn-2">¡Guardar Cambios!</button>
+		</form>
+	</div>
+	<div>
+		<form method="post">
+			{% csrf_token %}
+			{% for feria in ferias %}
+			<div>
+				<div>
+					<input type="radio" name="selected_fair" value="{{ feria.id }}" {% if feria == selected_feria %}checked{% endif %} required>
+					<img src="{{ feria.image.url }}" alt="{{ fair.title }}">
+					<h5>{{ feria.title }}</h5>
+					<p>{{ feria.organizer }}</p>
+				</div>
+			</div>
+			{% endfor %}
+			<button type="submit" class="btn-2">Seleccionar Feria</button>
+		</form>
+	</div>
+{% endblock content %}
