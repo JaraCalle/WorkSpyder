@@ -1,3 +1,12 @@
 from django.contrib import admin
+from .models import Aspirant, FairRegistration
 
-# Register your models here.
+@admin.register(Aspirant)
+class AspirantAdmin(admin.ModelAdmin):
+    list_display = ('id', 'firsrtName', 'secondName', 'lastName', 'email', 'phone')
+    search_fields = ('lastName', 'email')
+
+@admin.register(FairRegistration)
+class FairRegistrationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'aspirant', 'fair', 'registrationDate')
+    search_fields = ('aspirant', 'fair')

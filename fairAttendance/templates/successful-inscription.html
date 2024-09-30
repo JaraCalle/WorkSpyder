@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load qr_code %}
+
+{% block content %}
+
+<h1>Te inscribiste correctamente a:</h1>
+<h2>{{ fair_title }}</h2>
+{% qr_from_text "http://127.0.0.1:8000/attendance/successful-attendance" size="L" %}
+<p>Recuerda no compartir este QR con nadie más</p>
+<div>
+    <button class="btn-2">Agendar en Google Calendar</button>
+    <button class="btn-2">
+        <a href="{% url 'view_fairs' %}">Seguir viendo ferias</a>
+    </button>
+</div>
+
+
+{% endblock content %}

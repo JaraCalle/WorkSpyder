@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'exploreFairs'
+    'qr_code',
+    'exploreFairs',
+    'RegisterLogin',
+    'fairManagement',
+    'fairAttendance',
 ]
 
 MIDDLEWARE = [
