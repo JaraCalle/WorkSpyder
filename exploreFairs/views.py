@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import JobFair
+from fairManagement.models import Aspirant
 from django.db.models import Q
 
 def view_fairs(request):
@@ -25,4 +26,11 @@ def view_fairs(request):
 
 def fair_detail_view(request, id):
     fair = get_object_or_404(JobFair, id=id)
-    return render(request, 'detail-fair.html', {'fair': fair})
+    aspirant = None
+    if request.user.is_authenticated:
+        # Verifica si existe un Aspirant asociado al usuario autenticado
+        try:
+            aspirant = Aspirant.objects.get(user=request.user)
+        except Aspirant.DoesNotExist:
+            aspirant = None  # Si no existe, simplemente no asigna ningún aspirante
+    return render(request, 'detail-fair.html', {'fair': fair, 'aspirant': aspirant})

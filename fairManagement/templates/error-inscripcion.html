@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Error de Inscripción{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1>Inscripción Fallida</h1>
+    <p>{{ message }}</p>
+    <button class="btn-2">
+        <a href="{% url 'view_fairs' %}" class="btn btn-primary">Volver a las Ferias</a>
+    </button>
+</div>
+{% endblock content %}
