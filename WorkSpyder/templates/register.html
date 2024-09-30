@@ -1,0 +1,31 @@
+{% extends 'RegisterLogin/layout.html' %}
+
+{% block content %}
+
+<form class="form" method="post">  
+    {% csrf_token %}
+    {{ form.as_p}}
+
+    <button type="submit" id="submit">Registrarse</button>
+</form>
+
+
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="notification {{ message.tags}}">
+        {{ message }}
+    </div>
+    {% endfor%}
+{% endif %}
+
+{%if request.user.is.authenticated %}
+<li> <a href="{% url 'logout' %}">Logout</a> </li>
+{% else %}
+<li> <a href="{% url 'register' %}">Register</a> </li>
+<li> <a href="{% url 'login' %}">Login</a> </li>
+{% endif %}
+
+
+
+{% endblock %}
