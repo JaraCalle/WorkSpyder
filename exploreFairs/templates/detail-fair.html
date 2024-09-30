@@ -3,9 +3,8 @@
 {% load static %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
-
 <link rel="stylesheet" href="{% static 'css/detail-fair.css' %}">
+<link rel="stylesheet" href="{% static 'css/Lightbox.css' %}">
 {% endblock links %}
 
 {% block title %}{{ fair.title }} - Ferias de empleo{% endblock title %}
@@ -26,10 +25,10 @@
     </div>
     <div class="event-footer">
       <div class="event-info">
-          <p><span class="event-label">Organizado por:</span> {{ fair.organizer.username }}</p>
-          <p><span class="event-label">Fecha:</span> {{ fair.event_date|date:"d M Y" }}</p>
-          <p><span class="event-label">Ubicación:</span> {{ fair.location }}</p>
-          <p><span class="event-label">Ponente principal:</span> {{ fair.keynote_speaker }}</p>
+        <p><span class="event-label">Organizado por:</span> {{ fair.organizer.username }}</p>
+        <p><span class="event-label">Fecha:</span> {{ fair.event_date|date:"d M Y" }}</p>
+        <p><span class="event-label">Ubicación:</span> {{ fair.location }}</p>
+        <p><span class="event-label">Ponente principal:</span> {{ fair.keynote_speaker }}</p>
       </div>
     </div>  
     <div class="event-button">
@@ -37,40 +36,7 @@
     </div>
   </div>
 </div>
-
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lightbox">
-  <div class="lightbox-content">
-    <span class="close">&times;</span>
-    <div class="lightbox-caption" id="caption"></div>
-    <img class="lightbox-image" id="lightbox-img">
-  </div>
-</div>
 {% endblock content %}
 
 {% block scripts %}
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var lightbox = document.getElementById('lightbox');
-    var lightboxImg = document.getElementById('lightbox-img');
-    var caption = document.getElementById('caption');
-    var close = document.getElementsByClassName('close')[0];
-    
-    document.getElementById('lightbox-image').onclick = function() {
-      lightbox.style.display = 'flex'; // Mostrar lightbox
-      lightboxImg.src = this.src;
-      caption.innerHTML = this.alt;
-    };
-
-    close.onclick = function() {
-      lightbox.style.display = 'none'; // Ocultar lightbox
-    };
-
-    window.onclick = function(event) {
-      if (event.target == lightbox) {
-        lightbox.style.display = 'none'; // Ocultar lightbox al hacer clic fuera
-      }
-    };
-  });
-</script>
 {% endblock scripts %}

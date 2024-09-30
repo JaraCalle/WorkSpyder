@@ -10,7 +10,7 @@ def add_fair_view(request):
         form = FeriaForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('view_fairs')
     else:
         form = FeriaForm()
     return render(request, 'addfair.html', {'form': form})
