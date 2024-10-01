@@ -62,3 +62,21 @@
 .data-card-container p {
     color: var(--active-btn-color);
 }
+
+#qr-container h1 {
+    text-align: center;
+}
+
+#qr-container h2 {
+    font-weight: var(--title-weight);
+}
+
+#qr-container p {
+    margin: 0;
+}
+
+#qr-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

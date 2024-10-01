@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 {% load qr_code %}
 
-{% block content %}
+{% load static %}
 
-<h1>Te inscribiste correctamente a:</h1>
-<h2>{{ fair_title }}</h2>
-{% qr_from_text "http://127.0.0.1:8000/attendance/successful-attendance" size="L" %}
-<p>Recuerda no compartir este QR con nadie más</p>
-<div>
-    <button class="btn-2">Agendar en Google Calendar</button>
-    <button class="btn-2">
-        <a href="{% url 'view_fairs' %}">Seguir viendo ferias</a>
-    </button>
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/detail-fair.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+{% endblock links %}
+
+{% block content %}
+<div class="event-card-container flex">
+    <div class="event-card form-container" id="qr-container">
+        <h1>Te inscribiste correctamente a:</h1>
+        <h2>{{ fair_title }}</h2>
+        {% qr_from_text "http://127.0.0.1:8000/attendance/successful-attendance" size="M" %}
+        <p class="disclaimer-p">Recuerda no compartir este QR con nadie más</p>
+        <div>
+            <button class="btn-secondary">Agendar en Google Calendar</button>
+            <button class="btn-primary">
+                <a href="{% url 'view_fairs' %}">Seguir viendo ferias</a>
+            </button>
+        </div>
+    </div>
 </div>
 
 
