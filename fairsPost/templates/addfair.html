@@ -3,8 +3,9 @@
 {% load static %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'css/search.css' %}">
+<link rel="stylesheet" href="{% static 'css/fairs-manager.css' %}">
 <link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 {% endblock links %}
 
@@ -12,13 +13,14 @@
 
 {% block content %}
 <div class="principal-content-container">
-    <section class="main-container" style="justify-content:center">
-		<h2>Crear una feria nueva</h2>
+    <section class="main-container form-container" id="create-fair-form">
+		<h1>Crear una feria nueva</h1>
 		<div>
 			<form method="post" enctype="multipart/form-data">
-				{% csrf_token %}
-				{{ form.as_p }}
-				<br>
+				<div>
+					{% csrf_token %}
+					{{ form.as_p }}
+				</div>
 				<button type="submit" class="btn-primary">¡Publicar!</button>
 			</form>
 		</div>

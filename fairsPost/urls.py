@@ -7,7 +7,7 @@ urlpatterns = [
     path('', post_home_view, name="post_home"),
     path("addfair", add_fair_view, name="add_fair"),
     path("editfair", edit_fair_view, name="edit_fair"),
-    path("editfair/<int:feria_id>/", edit_fair_view, name="edit_selected_fair")
+    path("editfair/<int:feria_id>/", edit_fair_view, name="edit_selected_fair"),
 ]
 
 if settings.DEBUG:

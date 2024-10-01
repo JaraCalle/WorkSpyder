@@ -9,10 +9,14 @@ def add_fair_view(request):
     if request.method == 'POST':
         form = FeriaForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            fair = form.save(commit=False)
+            fair.organizer = request.user
+            fair.save()
+            
             return redirect('view_fairs')
     else:
         form = FeriaForm()
+    
     return render(request, 'addfair.html', {'form': form})
 
 def edit_fair_view(request, feria_id=None):
@@ -20,6 +24,7 @@ def edit_fair_view(request, feria_id=None):
         feria = get_object_or_404(JobFair, id=feria_id)
     else:
         feria = None
+        
     if request.method == 'POST':
         if 'selected_fair' in request.POST:
             feria_id = request.POST.get('selected_fair')

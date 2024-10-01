@@ -18,9 +18,8 @@ def register(request):
             form.save()
             username = form.cleaned_data['username']
             messages.success(request, f'usuario {username} creado')
-            return redirect('auth:login')
     else:
         form= UserRegisterForm()
 
-    context = { 'form' : form}
+    context = { 'form' : form }
     return render(request, 'register.html', context )

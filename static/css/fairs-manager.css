@@ -1,0 +1,18 @@
+.fairs-manager-container {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fairs-manager-container h1 {
+    font-weight: var(--medium-weight);
+    text-align: center;
+}
+
+.fairs-manager-container ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
