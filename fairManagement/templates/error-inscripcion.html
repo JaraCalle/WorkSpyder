@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Error de Inscripción{% endblock title %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="{% static 'css/fairs-manager.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock links %}
+
+{% block title %}WorkSpyder - Error de Inscripción{% endblock title %}
 
 {% block content %}
-<div class="container">
-    <h1>Inscripción Fallida</h1>
-    <p>{{ message }}</p>
-    <button class="btn-2">
-        <a href="{% url 'view_fairs' %}" class="btn btn-primary">Volver a las Ferias</a>
-    </button>
+<div class="principal-content-container" style="height: 80vh;">
+    <section class="main-container fairs-manager-container">
+        <h1>Inscripción Fallida</h1>
+        <p>{{ message }}</p>
+        <button class="btn-2">
+            <a href="{% url 'view_fairs' %}" class="btn btn-primary">Volver a las Ferias</a>
+        </button>
+    </section>
 </div>
 {% endblock content %}

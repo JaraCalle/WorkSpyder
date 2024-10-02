@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from exploreFairs.models import JobFair
 from django.utils import timezone
+from django.contrib.auth.decorators import user_passes_test
 
-# Create your views here.
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def register_fair(request):
     if request.method == "POST":
         aspirant_id = request.POST.get('aspirant_id')

@@ -60,6 +60,7 @@ body {
     border: solid #E4E9ED 1px;
     border-radius: 20px;
     padding: 5px 10px;
+    cursor: pointer;
 }
 
 .nav-event  {
@@ -191,4 +192,61 @@ body {
     transform: skewX(-45deg) scale(1, 1);
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* Estilos básicos para el botón del usuario */
+.nav-user {
+    position: relative; /* Necesario para posicionar el menú */
+}
+
+/* Estilos del menú desplegable */
+.user-menu {
+    position: absolute;
+    top: 100%; /* Para que el menú aparezca justo debajo del botón */
+    right: 0;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    z-index: 1000000000;
+    min-width: 150px;
+    display: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.user-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-menu ul li {
+    padding: 10px;
+}
+
+.user-menu ul li a {
+    text-decoration: none;
+    color: var(--darker-green);
+    display: block;
+}
+
+.user-menu ul li:hover {
+    background-color: var(--light-white);
+}
+
+/* Clase hidden para ocultar el menú */
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.nav-right-elements {
+    position: relative; /* Make this the containing block for .user-menu */
 }

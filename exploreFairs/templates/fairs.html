@@ -27,7 +27,7 @@
     <script src="{% static 'js/hero-section.js' %}"></script>
 </div>
 <div class="principal-content-container">
-    <section class="main-container" style="justify-content:center">
+    <section class="main-container" style="justify-content:center; flex-direction: column; align-items: center;">
         <button type="button" class="btn-secondary" onclick="toggleFilters()">Filtros de búsqueda</button> <!-- Botón para colapsar -->
         <div id="filterSection" class="collapsible">
             <form class="filter-form" method="GET" action="{% url 'view_fairs' %}">

@@ -1,17 +1,18 @@
 from django.shortcuts import render
-#agregado para el login
-from .forms import UserRegisterForm
-from django.contrib import messages
 from django.shortcuts import redirect
-from fairManagement.models import Aspirant
+from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.views import LoginView
-from .forms import CustomAuthenticationForm
+from fairManagement.models import Aspirant
+from .forms import CustomAuthenticationForm, UserRegisterForm
 
 class CustomLoginView(LoginView):
     form_class = CustomAuthenticationForm
     template_name = 'login.html'
+    redirect_authenticated_user = True
 
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='view_fairs')
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)

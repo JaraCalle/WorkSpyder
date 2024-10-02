@@ -15,22 +15,37 @@
 <body>
     <header>
         <nav class="nav-container flex">
-            <section class="nav-brand flex">
-                <img src="{% static 'images/WorkSpyder-logo.svg' %}" alt="WorkSpyder">
-                <h1>WorkSpyder</h1>
-            </section>
-            <form method="POST" action="{% url 'auth:logout' %}">
-                {% csrf_token %}
-                <button type="submit">Cerrar sesión</button>
-            </form>
+            <a href="{% url "view_fairs" %}">
+                <section class="nav-brand flex">
+                    <img src="{% static 'images/WorkSpyder-logo.svg' %}" alt="WorkSpyder">
+                    <h1>WorkSpyder</h1>
+                </section>
+            </a>
             <div class="nav-right-elements flex">
-                <a class="nav-event nav-btn" href="">
+                <a class="nav-event nav-btn" href="{% url 'post:post_home' %}">
                     Pon tu evento en WorkSpyder
                 </a>
-                <button class="nav-user flex nav-btn">
+                <button class="nav-user flex nav-btn" onclick="toggleMenu()">
                     <img src="{% static 'images/bars.svg' %}" alt="Menú">
                     <img class="user-img" src="{% static 'images/user-circle.svg' %}" alt="Usuario">
                 </button>
+                
+                <!-- Menú desplegable -->
+                <div id="user-menu" class="user-menu hidden">
+                    <ul>
+                        {% if user.is_authenticated %}
+                        <li><a>
+                            <form method="POST" action="{% url 'auth:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit">Cerrar sesión</button>
+                            </form>
+                        </a></li>
+                        {% else %}
+                        <li><a href="{% url "auth:login" %}">Iniciar Sesión</a></li>
+                        <li><a href="{% url "auth:register" %}">Registrarse</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -46,11 +61,29 @@
                     <a href="">Acerca de nosotros</a>
                 </div>
                 <div class="footer-social-media flex">
-                    <a href=""><span class="mdi--github"></span></a>
+                    <a href="https://github.com/JaraCalle/WorkSpyder"><span class="mdi--github"></span></a>
                 </div>
             </section>
         </div>
     </footer>
 </body>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('user-menu');
+        if (menu) {
+            menu.classList.toggle('show'); // Alterna entre mostrar y ocultar el menú
+        } else {
+            console.error("El menú no fue encontrado.");
+        }
+    }
+    
+    // Cerrar el menú si se hace clic fuera de él
+    window.onclick = function(event) {
+        const menu = document.getElementById('user-menu');
+        if (menu && !menu.contains(event.target) && !event.target.matches('.nav-user, .nav-user *')) {
+            menu.classList.remove('show');
+        }
+    }
+</script>
 {% block scripts %}{% endblock scripts %}
 </html>

@@ -3,6 +3,8 @@ from django.conf.urls.static import static
 from django.urls import path
 from .views import post_home_view, add_fair_view, edit_fair_view
 
+app_name = 'post'
+
 urlpatterns = [
     path('', post_home_view, name="post_home"),
     path("addfair", add_fair_view, name="add_fair"),
