@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'qr_code',
     'exploreFairs',
-    'RegisterLogin',
+    'auth',
     'fairManagement',
     'fairAttendance',
     'fairsPost'

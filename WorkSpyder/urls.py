@@ -23,5 +23,5 @@ urlpatterns = [
     path('management/', include('fairManagement.urls')),
     path('attendance/', include('fairAttendance.urls')),
     path('post/', include('fairsPost.urls')),
-    path('auth/', include('RegisterLogin.urls'))
+    path('auth/', include('auth.urls'))
 ]
