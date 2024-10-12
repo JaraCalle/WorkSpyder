@@ -27,7 +27,11 @@
                 </a>
                 <button class="nav-user flex nav-btn" onclick="toggleMenu()">
                     <img src="{% static 'images/bars.svg' %}" alt="Menú">
-                    <img class="user-img" src="{% static 'images/user-circle.svg' %}" alt="Usuario">
+                    {% if user.is_authenticated %}
+                        <img class="user-img" src="https://www.gravatar.com/avatar/{{ user.avatar }}?d=retro&f=y&s=128" alt="User Avatar">
+                    {% else %}
+                        <img class="user-img" src="{% static 'images/user-circle.svg' %}" alt="Usuario">
+                    {% endif %}
                 </button>
                 
                 <!-- Menú desplegable -->

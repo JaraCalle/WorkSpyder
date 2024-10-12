@@ -137,3 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Agregado para el login
 LOGIN_REDIRECT_URL = 'view_fairs'
+
+#Agregado para validar el usuario custom
+AUTH_USER_MODEL = 'custom_auth.CustomUser'

@@ -1,41 +1,8 @@
 from django import forms
 from exploreFairs.models import JobFair 
+from .CONST import DEPARTAMENTOS, MUNICIPIOS
 
 class FeriaForm(forms.ModelForm):
-    DEPARTAMENTOS = [
-        ('Amazonas', 'Amazonas'),
-        ('Antioquía', 'Antioquía'),
-        ('Arauca', 'Arauca'),
-        ('Atlántico', 'Atlántico'),
-        ('Bolívar', 'Bolívar'),
-        ('Boyacá', 'Boyacá'),
-        ('Caldas', 'Caldas'),
-        ('Caquetá', 'Caquetá'),
-        ('Casanare', 'Casanare'),
-        ('Cauca', 'Cauca'),
-        ('Cesar', 'Cesar'),
-        ('Chocó', 'Chocó'),
-        ('Córdoba', 'Córdoba'),
-        ('Cundinamarca', 'Cundinamarca'),
-        ('Guainía', 'Guainía'),
-        ('Guaviare', 'Guaviare'),
-        ('Huila', 'Huila'),
-        ('La Guajira', 'La Guajira'),
-        ('Magdalena', 'Magdalena'),
-        ('Meta', 'Meta'),
-        ('Nariño', 'Nariño'),
-        ('Norte de Santander', 'Norte de Santander'),
-        ('Putumayo', 'Putumayo'),
-        ('Quindío', 'Quindío'),
-        ('Risaralda', 'Risaralda'),
-        ('San Andrés y Providencia', 'San Andrés y Providencia'),
-        ('Santander', 'Santander'),
-        ('Sucre', 'Sucre'),
-        ('Tolima', 'Tolima'),
-        ('Valle del Cauca', 'Valle del Cauca'),
-        ('Vaupés', 'Vaupés'),
-        ('Vichada', 'Vichada'),
-    ]
 
     title = forms.CharField(
         label="",
@@ -45,26 +12,41 @@ class FeriaForm(forms.ModelForm):
         label="",
         widget=forms.Textarea(attrs={'class': 'form-input', 'placeholder': 'Descripción del evento', 'rows': 4})
     )
-    event_date = forms.DateField(
+    start_event_date = forms.DateField(
         label="",
-        widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'date', 'placeholder': 'Fecha del evento'})
+        widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'date', 'placeholder': 'Fecha de inicio'})
+    )
+    
+    end_event_date = forms.DateField(
+        label="",
+        widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'date', 'placeholder': 'Fecha de finalización'})
     )
 
-    departamento = forms.ChoiceField(
+    department = forms.ChoiceField(
         choices=DEPARTAMENTOS,
         label="",
         widget=forms.Select(attrs={'class': 'form-input', 'id': 'usp-custom-departamento-de-residencia',})
     )
 
-    ciudad = forms.ChoiceField(
-        choices=[],
+    city = forms.ChoiceField(
+        choices=MUNICIPIOS,
         label="",
         widget=forms.Select(attrs={'class': 'form-input', 'id': 'usp-custom-municipio-ciudad'})
     )
 
-    location = forms.CharField(
+    direction = forms.CharField(
         label="",
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Dirección'})
+    )
+
+    start_hour = forms.TimeField(
+        label="",
+        widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'time', 'placeholder': 'Hora de inicio'})
+    )
+
+    end_hour = forms.TimeField(
+        label="",
+        widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'time', 'placeholder': 'Hora de cierre'})
     )
 
     keynote_speaker = forms.CharField(
@@ -78,6 +60,6 @@ class FeriaForm(forms.ModelForm):
 
     class Meta:
         model = JobFair
-        fields = ['title', 'description', 'event_date', 'departamento', 'ciudad', 'location', 'keynote_speaker', 'image']
+        fields = ['title', 'description', 'start_event_date', 'end_event_date', 'start_hour', 'end_hour', 'department', 'city', 'direction', 'keynote_speaker', 'image']
         help_texts = {k: "" for k in fields}
 

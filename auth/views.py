@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.views import LoginView
 from fairManagement.models import Aspirant
 from .forms import CustomAuthenticationForm, UserRegisterForm
+from .utils import hash_email
 
 class CustomLoginView(LoginView):
     form_class = CustomAuthenticationForm
@@ -17,7 +18,14 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)  # No guardar aún
+            
+            email = form.cleaned_data['email']
+
+            # Asigna el avatar automáticamente
+            user.avatar = hash_email(email)
+
+            user.save()  # Ahora guarda el usuario
             
             aspirant = Aspirant(
                 firsrtName="",
@@ -29,8 +37,7 @@ def register(request):
             )
             aspirant.save()
             
-            username = form.cleaned_data['username']
-            messages.success(request, f'Usuario {username} creado y aspirante registrado.')
+            messages.success(request, f'Usuario {email} creado y aspirante registrado.')
             return redirect('auth:login')
     else:
         form = UserRegisterForm()
