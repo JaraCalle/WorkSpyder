@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'auth',
     'fairManagement',
     'fairAttendance',
-    'fairsPost'
+    'fairsPost',
+    'userProfile',
 ]
 
 MIDDLEWARE = [
