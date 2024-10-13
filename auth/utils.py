@@ -10,6 +10,3 @@ def hash_email(email: str) -> str:
     hash = hashlib.md5(email.encode())
 
     return hash.hexdigest()
-
-
-print(hash_email("jjjarac@eafit.edu.co"))

@@ -3,7 +3,7 @@ from .models import Aspirant, FairRegistration
 
 @admin.register(Aspirant)
 class AspirantAdmin(admin.ModelAdmin):
-    list_display = ('id', 'firsrtName', 'secondName', 'lastName', 'email', 'phone')
+    list_display = ('id', 'firstName', 'secondName', 'lastName', 'phone')
     search_fields = ('lastName', 'email')
 
 @admin.register(FairRegistration)

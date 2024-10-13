@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from exploreFairs.models import JobFair
+from fairManagement.models import FairRegistration
 from .forms import FeriaForm
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
@@ -42,3 +43,14 @@ def edit_fair_view(request, feria_id=None):
     ferias = JobFair.objects.filter(organizer=request.user)
 
     return render(request, 'editfair.html', {'form': form, 'ferias': ferias, 'selected_feria': feria})
+
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
+def view_published_fairs(request):
+    ferias = JobFair.objects.filter(organizer=request.user)
+    return render(request, "published_fairs.html", {'ferias': ferias})
+
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
+def view_registered_fair(request, id):
+    fair = get_object_or_404(JobFair, id=id)
+    records = FairRegistration.objects.filter(fair=fair)
+    return render(request, 'registered_fair.html', {'fair': fair, 'records': records})

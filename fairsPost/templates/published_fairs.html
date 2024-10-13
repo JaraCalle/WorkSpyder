@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="{% static 'css/fairs-manager.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock links %}
+
+{% block title %}WorkSpyder - Mis ferias{% endblock title %}
+
+{% block content %}
+<div class="principal-content-container" style="height: 80vh;">
+    <section class="main-container fairs-manager-container" id="my_fairs">
+      <h1>Tus ferias publicadas</h1>
+      <div class="optionSelect">
+        <ul class="fairs-list">
+            {% for fair in ferias %}
+            <li>
+                <div class="single-fair">
+                    <img src="{{ fair.image.url }}" alt="Imagen del evento">
+                    <div>
+                        <h2>{{ fair.title }}</h2>
+                        <p>{{fair.city}} - {{ fair.department }}</p>
+                    </div>
+                    <div>
+                        <button class="btn-primary" onclick="window.location.href='{% url 'post:view_registered_fair' fair.id %}'">Ver inscritos</button>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </section>
+  </div>
+{% endblock %}

@@ -38,6 +38,7 @@
                 <div id="user-menu" class="user-menu hidden">
                     <ul>
                         {% if user.is_authenticated %}
+                        <li><a href="{% url "post:view_published_fairs" %}">Mis ferias</a></li>
                         <li><a>
                             <form method="POST" action="{% url 'auth:logout' %}">
                                 {% csrf_token %}
