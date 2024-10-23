@@ -12,11 +12,24 @@
 
 {% block content %}
 <div class="principal-content-container" style="height: 80vh;">
-    <section class="main-container fairs-manager-container" id="my_fairs">
-      <h1>{{ fair.title }}</h1>
-      {% for registered in records %}
-        <p>{{ registered.aspirant }}</p>
-      {% endfor %}
-    </section>
+  <section class="main-container fairs-manager-container" id="my_fairs">
+    <h1>{{ fair.title }}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspirante</th>
+          <th>Asistencia Marcada</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for registered in registers %}
+          <tr>
+            <td>{{ registered.registration.aspirant }}</td>
+            <td>{{ registered.isRead|yesno:"✅,⛔" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
   </div>
 {% endblock %}

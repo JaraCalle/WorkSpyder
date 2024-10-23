@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import QR
 from django.contrib.auth.decorators import user_passes_test
 from fairManagement.models import FairRegistration
+from WorkSpyder.settings import SERVER_IP
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def generateQR(request, registration_id, fair_title):
@@ -14,7 +15,7 @@ def generateQR(request, registration_id, fair_title):
         qr = QR(registration=registration)
         qr.save()
 
-    qr_url = f"http://127.0.0.1:8000/attendance/read-attendance/{ qr.id }"
+    qr_url = f"http://{ SERVER_IP }/attendance/read-attendance/{ qr.id }"
     
     return render(request, 'successful-inscription.html', {'registration_id': registration_id, 'fair_title': fair_title, 'qr_url': qr_url})
 
@@ -23,9 +24,7 @@ def readQR(request, qr_id):
     qr = get_object_or_404(QR, id=qr_id)
     registro = qr.registration
     
-    aspirante = registro.aspirant
     feria = registro.fair
-    
     organizador = feria.organizer
     
     # Si el usuario logeado no es el creador de la feria no puede marcar la asistencia
