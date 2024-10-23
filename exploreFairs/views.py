@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.urls import reverse
 from .models import JobFair
+from .utils import is_aspirant_data_empty
 from fairManagement.models import Aspirant
 from django.db.models import Q
 
@@ -33,4 +35,9 @@ def fair_detail_view(request, id):
             aspirant = Aspirant.objects.get(user=request.user)
         except Aspirant.DoesNotExist:
             aspirant = None  # Si no existe, simplemente no asigna ningún aspirante
+    
+    # Si el aspirante no ha llenado la información del perfil (nombre y apellido) se le envia a llenarla
+    if is_aspirant_data_empty(aspirant):
+        return HttpResponseRedirect(reverse('profile:edit_profile') + '?next=' + request.path)
+    
     return render(request, 'detail-fair.html', {'fair': fair, 'aspirant': aspirant})

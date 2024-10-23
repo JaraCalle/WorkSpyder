@@ -28,16 +28,13 @@ def register(request):
             user.save()  # Ahora guarda el usuario
             
             aspirant = Aspirant(
-                firsrtName="",
+                firstName="",
                 secondName="", 
                 lastName="",
-                email=user.email,
                 phone="",
                 user=user
             )
             aspirant.save()
-            
-            messages.success(request, f'Usuario {email} creado y aspirante registrado.')
             return redirect('auth:login')
     else:
         form = UserRegisterForm()
