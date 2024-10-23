@@ -14,7 +14,7 @@
     <div class="event-card form-container" id="qr-container">
         <h1>Te inscribiste correctamente a:</h1>
         <h2>{{ fair_title }}</h2>
-        {% qr_from_text "http://127.0.0.1:8000/attendance/successful-attendance" size="M" %}
+        {% qr_from_text qr_url size="M" %}
         <p class="disclaimer-p">Recuerda no compartir este QR con nadie más</p>
         <div>
             <button class="btn-secondary">Agendar en Google Calendar</button>

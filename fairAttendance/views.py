@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404, redirect
 from .models import QR
 from django.contrib.auth.decorators import user_passes_test
 from fairManagement.models import FairRegistration
@@ -6,9 +6,32 @@ from fairManagement.models import FairRegistration
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def generateQR(request, registration_id, fair_title):
     registration = get_object_or_404(FairRegistration, id=registration_id)
-    qr = QR(registration=registration)
-    qr.save()
-    return render(request, 'successful-inscription.html', {'registration_id': registration_id, 'fair_title': fair_title,})
 
-def readQR(request):
-    return render(request, 'successful-attendance.html')
+    # Corrigue el error de que al estar viendo el QR recarguen la página y se generen más QR's
+    if QR.objects.filter(registration=registration).exists():        
+        qr = get_object_or_404(QR, registration=registration)
+    else:
+        qr = QR(registration=registration)
+        qr.save()
+
+    qr_url = f"http://127.0.0.1:8000/attendance/read-attendance/{ qr.id }"
+    
+    return render(request, 'successful-inscription.html', {'registration_id': registration_id, 'fair_title': fair_title, 'qr_url': qr_url})
+
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
+def readQR(request, qr_id):
+    qr = get_object_or_404(QR, id=qr_id)
+    registro = qr.registration
+    
+    aspirante = registro.aspirant
+    feria = registro.fair
+    
+    organizador = feria.organizer
+    
+    # Si el usuario logeado no es el creador de la feria no puede marcar la asistencia
+    if organizador != request.user:
+        return render(request, 'denied-permission.html')
+
+    qr.set_as_read()
+
+    return render(request, 'read-attendance.html', {'qr': qr})

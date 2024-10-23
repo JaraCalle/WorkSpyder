@@ -4,7 +4,7 @@ from django.urls import path
 from .views import generateQR, readQR
 
 urlpatterns = [
-    path('successful-attendance/', readQR, name='successful_attendance'),
+    path('read-attendance/<int:qr_id>', readQR, name='successful_attendance'),
     path('successful-inscription/<int:registration_id>/<str:fair_title>/', generateQR, name='successful_inscription'),
 ]
 
