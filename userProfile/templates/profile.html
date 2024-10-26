@@ -3,11 +3,40 @@
 {% load static %}
 
 {% block links %}
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+<link rel="stylesheet" href="{% static 'css/fairs-manager.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock links %}
 
+{% block title %}{{ aspirant.firstName }} - perfil de Workspyder{% endblock title %}
+
 {% block content %}
-<button class="btn-primary" onclick="window.location.href='{% url 'profile:edit_profile' %}'">Editar perfil</button>
-<img class="user-img" src="https://www.gravatar.com/avatar/{{ user.avatar }}?d=retro&f=y&s=128" alt="User Avatar">
-<p>{{ aspirant.firstName }} {{ aspirant.secondName }} {{ aspirant.lastName }}</p>
-<p>{{ aspirant.phone }}</p>
+<div class="profile-container">
+    <section class="user-data-container">
+        <img class="user-img" src="https://www.gravatar.com/avatar/{{ user.avatar }}?d=retro&f=y&s=128" alt="User Avatar">
+        <h2>{{ aspirant }}</h2>
+        <p>{{ aspirant.phone }}</p>
+        <button class="btn-primary" onclick="window.location.href='{% url 'profile:edit_profile' %}'">Editar perfil</button>
+    </section>
+    <div class="fairs-data-container">
+        <h2>Ferias a las que te inscribiste</h2>
+        <section class="main-container fairs-principal-container flex">
+            {% for fair_registration in fairs_registration %}
+                <div class="card-fair" id="card-fair-profile">
+                    <div class="img-card-container">
+                        <!-- Usa fair.image.url para acceder a la URL de la imagen cargada -->
+                        <img src="{{ fair_registration.fair.image.url }}" alt="{{ fair_registration.fair.title }}">
+                    </div>
+                    <div class="data-card-container">
+                        <h1>{{ fair_registration.fair.title }}</h1>
+                        <p>{{ fair_registration.fair.event_date|date:"d M Y" }}</p>
+                        <button class="btn-primary" onclick="window.location.href='{% url 'fair' fair_registration.fair.id %}'">Ver feria</button>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No te has inscrito a ninguna feria todavia.</p>
+            {% endfor %}
+        </section>
+    </div>
+</div>
 {% endblock %}

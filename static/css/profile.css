@@ -1,0 +1,28 @@
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+.user-data-container {
+    width: 35%;
+}
+
+.fairs-data-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fairs-data-container section {
+    transform: scale(0.9); 
+    transform-origin: top left; 
+}
+
+@media (max-width: 768px) { 
+    .profile-container {
+        flex-direction: column;
+    }
+}
