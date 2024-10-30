@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from .models import JobFair
 from .utils import is_aspirant_data_empty
@@ -26,6 +27,7 @@ def view_fairs(request):
 
     return render(request, 'fairs.html', {'fairs': fairs})
 
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def fair_detail_view(request, id):
     fair = get_object_or_404(JobFair, id=id)
     aspirant = None
