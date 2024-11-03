@@ -10,3 +10,8 @@ class AspirantAdmin(admin.ModelAdmin):
 class FairRegistrationAdmin(admin.ModelAdmin):
     list_display = ('id', 'aspirant', 'fair', 'registrationDate')
     search_fields = ('aspirant', 'fair')
+
+@admin.register(FairFavorite)
+class FairFavorite(admin.ModelAdmin):
+    list_display = ('id', 'aspirant', 'fair', 'favoriteDate')
+    search_fields = ('aspirant', 'fair')
