@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Aspirant, FairRegistration
+from .models import Aspirant, FairRegistration, FairFavorite
 
 @admin.register(Aspirant)
 class AspirantAdmin(admin.ModelAdmin):
