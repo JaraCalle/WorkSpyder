@@ -32,14 +32,14 @@
         <p><span class="event-label">Ponente principal:</span> {{ fair.keynote_speaker }}</p>
       </div>
     </div>  
-    <form class="event-button"method="post" action="{% url 'register_fair'%}">
+    <form class="event-button" method="post" action="{% url 'management:register_fair' %}">
       {% csrf_token %}
       <input type="hidden" name="fair_id" value="{{ fair.id }}">
       <input type="hidden" name="fair_title" value="{{ fair.title }}">
       <input type="hidden" name="aspirant_id" value="{{ aspirant.id }}">
       <button class="btn-primary" type="submit">¡Inscribirme!</button>
     </form>
-    <form class="fair_button" method="post" action="{% url 'favorite_fair' %}">
+    <form class="fair_button" method="post" action="{% url 'management:favorite_fair' %}">
         {% csrf_token %}
       <input type="hidden" name="fair_id" value="{{ fair.id }}">
       <input type="hidden" name="fair_title" value="{{ fair.title }}">
