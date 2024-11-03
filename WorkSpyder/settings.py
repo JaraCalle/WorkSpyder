@@ -137,10 +137,17 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Agregado para el login
-LOGIN_REDIRECT_URL = 'view_fairs'
+#LOGIN_REDIRECT_URL = 'view_fairs'
+LOGIN_REDIRECT_URL = 'google_calendar_init'
 
 #Agregado para validar el usuario custom
 AUTH_USER_MODEL = 'custom_auth.CustomUser'
 
 #Acá se ubicará la dirección de donde el servidor se ejecúte en el momento
 SERVER_IP = '192.168.0.14'
+
+# Para manejar tokens de Google Calendar
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+GOOGLE_CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'credentials/google_calendar.json')
+GOOGLE_API_SCOPES = ['https://www.googleapis.com/auth/calendar']
+REDIRECT_URI ='http://localhost:8000/oauth2callback'
