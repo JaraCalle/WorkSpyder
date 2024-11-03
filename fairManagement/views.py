@@ -9,11 +9,11 @@ from django.contrib.auth.decorators import user_passes_test
 def register_fair(request):
     # Si no es POST, mostrar el formulario de inscripción o manejar otro caso
     if request.method != "POST":
-        return redirect('error_inscripcion', message= 'Ocurrió un error en la inscripción.')
+        return redirect('error_inscripcion', message='Ocurrió un error en la inscripción.')
 
     aspirant_id = request.POST.get('aspirant_id')
     fair_id = request.POST.get('fair_id')
-    
+
     aspirant = Aspirant.objects.get(id=aspirant_id)
     fair = JobFair.objects.get(id=fair_id)
 
@@ -25,7 +25,8 @@ def register_fair(request):
     registration.save()
     return redirect('successful_inscription', registration_id=registration.id, fair_title=fair.title)
 
-    def favorite_fair(request):
+
+def favorite_fair(request):
     if request.method == "POST":
         aspirant_id = request.POST.get('aspirant_id')
         fair_id = request.POST.get('fair_id')
@@ -39,7 +40,6 @@ def register_fair(request):
             favorite.save()
 
         return redirect("view_fairs")
-
 
 
 def error_inscripcion(request, message):
