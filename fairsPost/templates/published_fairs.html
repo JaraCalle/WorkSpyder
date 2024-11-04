@@ -12,47 +12,51 @@
 
 {% block content %}
 <div class="principal-content-container" style="height: 80vh;">
-    <section class="main-container fairs-manager-container" id="my_fairs">
-        <h1>Tus ferias publicadas</h1>
-        <div class="optionSelect">
-            <ul class="fairs-list">
-                {% for fair in ferias %}
-                <li>
-                    <div class="single-fair">
-                        <img src="{{ fair.image.url }}" alt="Imagen del evento">
-                        <div>
-                            <h2>{{ fair.title }}</h2>
-                            <p>{{fair.city}} - {{ fair.department }}</p>
+    {% if ferias %}
+        <section class="main-container fairs-manager-container" id="my_fairs">
+            <h1>Tus ferias publicadas</h1>
+            <div class="optionSelect">
+                <ul class="fairs-list">
+                    {% for fair in ferias %}
+                    <li>
+                        <div class="single-fair">
+                            <img src="{{ fair.image.url }}" alt="Imagen del evento">
+                            <div>
+                                <h2>{{ fair.title }}</h2>
+                                <p>{{fair.city}} - {{ fair.department }}</p>
+                            </div>
+                            <div>
+                                <button class="btn-primary" onclick="window.location.href='{% url 'post:view_registered_fair' fair.id %}'">Ver inscritos</button>
+                            </div>
                         </div>
-                        <div>
-                            <button class="btn-primary" onclick="window.location.href='{% url 'post:view_registered_fair' fair.id %}'">Ver inscritos</button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    {% endif %}
+    {% if favorites %}
+        <section class="main-container fairs-manager-container" id="favorite_fairs">
+            <h1>Mis Ferias Favoritas</h1>
+            <div class="optionSelect">
+                <ul class="fairs-list">
+                    {% for favorite in favorites %}
+                    <li>
+                        <div class="single-fair">
+                            <img src="{{ favorite.fair.image.url }}" alt="Imagen del evento">
+                            <div>
+                                <h2>{{ favorite.fair.title }}</h2>
+                                <p>{{favorite.fair.city}} - {{ favorite.fair.department }}</p>
+                            </div>
+                            <div>
+                                <button class="btn-primary" onclick="window.location.href='{% url 'fair' favorite.fair.id %}'">Ver Feria</button>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </section>
-    <section class="main-container fairs-manager-container" id="favorite_fairs">
-        <h1>Mis Ferias Favoritas</h1>
-        <div class="optionSelect">
-            <ul class="fairs-list">
-                {% for favorite in favorites %}
-                <li>
-                    <div class="single-fair">
-                        <img src="{{ favorite.fair.image.url }}" alt="Imagen del evento">
-                        <div>
-                            <h2>{{ favorite.fair.title }}</h2>
-                            <p>{{favorite.fair.city}} - {{ favorite.fair.department }}</p>
-                        </div>
-                        <div>
-                            <button class="btn-primary" onclick="window.location.href='{% url 'fair' favorite.fair.id %}'">Ver Feria</button>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </section>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    {% endif %}
 </div>
 {% endblock %}

@@ -19,7 +19,7 @@ def register_fair(request):
 
     # Si el aspirante ya se encuentra inscrito
     if FairRegistration.objects.filter(aspirant=aspirant, fair=fair).exists():
-        return redirect('error_inscripcion', message='Ya estás inscrito en esta feria.')
+        return redirect('management:error_inscripcion', message='Ya estás inscrito en esta feria.')
 
     registration = FairRegistration(aspirant=aspirant, fair=fair, registrationDate=timezone.now().date())
     registration.save()
