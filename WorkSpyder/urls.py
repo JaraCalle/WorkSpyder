@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from fairAttendance.views import google_calendar_redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('post/', include('fairsPost.urls')),
     path('auth/', include('auth.urls')),
     path('profile/', include('userProfile.urls')),
+    path('oauth2callback/', google_calendar_redirect, name='google_calendar_redirect')
 ]

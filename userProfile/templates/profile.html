@@ -31,6 +31,7 @@
                         <h1>{{ fair_registration.fair.title }}</h1>
                         <p>{{ fair_registration.fair.event_date|date:"d M Y" }}</p>
                         <button class="btn-primary" onclick="window.location.href='{% url 'fair' fair_registration.fair.id %}'">Ver feria</button>
+                        <button class="btn-primary" onclick="window.location.href='{% url 'schedule_fair' fair_registration.id %}'">Agendar</button>
                     </div>
                 </div>
             {% empty %}

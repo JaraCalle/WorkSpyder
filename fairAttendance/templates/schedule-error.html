@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/schedule_error.css' %}">
+{% endblock links %}
+
+{% block title %} Error de Agendamiento {% endblock title %}
+
+
+{% block content %}
+<div class="error-container">
+    <h1>Ocurrió un error al agendar tu evento a Google Calendar</h1>
+    <button class="btn-primary"><a href="{% url "view_fairs" %}">Regresar</a></button>
+</div>
+{% endblock content %}

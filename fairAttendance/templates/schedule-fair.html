@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+{% endblock links %}
+
+{% block title %} {{ fair.title }} - Agendado {% endblock title %}
+
+{% block content %}
+
+<div class="schedule-container">
+    <h1>¡Tu feria ha sido agendada con éxito!</h1>
+    <div class="schedule-details-container">
+        <div class="">
+            <h2>Nombre de la feria:</h2>
+            <p>{{ fair.title }}</p>
+        </div>
+        <div class="">
+            <h2>Ciudad:</h2>
+        <p>{{ fair.city }}</p>
+        </div>
+        <div class="">
+            <h2>Dirección:</h2>
+            <p>{{ fair.direction }}</p>
+        </div>
+        <div class="">
+            <h2>Fecha de inicio:</h2>
+            <p>{{ fair.start_event_date }}</p>
+        </div>
+        <div class="">
+            <h2>Fecha de fin:</h2>
+            <p>{{ fair.end_event_date }}</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<!--
+<div class="principal-content-container">
+    <h1>¡Tu feria ha sido agendada con éxito!</h1>
+    <div class="schedule-container">
+        <div class="fair-details-container">
+            <div class="fair-data-container">
+                <div class="fair-data-label">
+                    <h2>Nombre de la feria: </h2>
+                </div>
+                <div class="fair-data">
+                    <p>{{ fair.title }}</p>
+                </div>
+            </div class="fair-data-container">
+            <div class="fair-data-container">
+                <div class="fair-data-label">
+                    <h2>Ciudad: </h2>
+                </div>
+                <div class="fair-data">
+                    <p>{{ fair.city }}</p>
+                </div>
+            </div>
+            <div class="fair-data-container">
+                <div class="fair-data-label">
+                    <h2>Dirección: </h2>
+                </div>
+                <div class="fair-data">
+                    <p>{{ fair.direction }}</p>
+                </div>
+            </div>
+            <div class="fair-data-container">
+                <div class="fair-data-label">
+                    <h2>Fecha de inicio: </h2>
+                </div>
+                <div class="fair-data">
+                    <p>{{ fair.start_event_date }}</p>
+                </div>
+            </div>
+            <div class="fair-data-container">
+                <div class="fair-data-label">
+                    <h2>Fecha de fin: </h2>
+                </div>
+                <div class="fair-data">
+                    <p>{{ fair.end_event_date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
