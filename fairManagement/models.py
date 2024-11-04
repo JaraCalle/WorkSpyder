@@ -22,3 +22,9 @@ class FairRegistration(models.Model):
 
     def __str__(self):
         return f"{self.aspirant} {self.fair}"
+
+class FairFavorite(models.Model):
+    id = models.AutoField(primary_key=True)
+    aspirant = models.ForeignKey(Aspirant, on_delete=models.CASCADE)
+    fair = models.ForeignKey(JobFair, on_delete=models.CASCADE)
+    favoriteDate = models.DateField()
