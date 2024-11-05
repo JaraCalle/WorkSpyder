@@ -28,6 +28,10 @@ body {
     overscroll-behavior: none;
 }
 
+main {
+    min-height: 80dvh;
+}
+
 .flex {
     display: flex;
 }

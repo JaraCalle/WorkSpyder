@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from fairManagement.models import Aspirant
 from fairManagement.models import FairRegistration
+from fairAttendance.models import QR
 from .forms import AspirantForm
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')

@@ -11,7 +11,7 @@
 {% block title %}WorkSpyder - Mis ferias{% endblock title %}
 
 {% block content %}
-<div class="principal-content-container" style="height: 80vh;">
+<div class="principal-content-container" id="my-fairs-container">
     {% if ferias %}
         <section class="main-container fairs-manager-container" id="my_fairs">
             <h1>Tus ferias publicadas</h1>
@@ -26,7 +26,7 @@
                                 <p>{{fair.city}} - {{ fair.department }}</p>
                             </div>
                             <div>
-                                <button class="btn-primary" onclick="window.location.href='{% url 'post:view_registered_fair' fair.id %}'">Ver inscritos</button>
+                                <button class="btn-secondary" onclick="window.location.href='{% url 'post:view_registered_fair' fair.id %}'">Ver inscritos</button>
                             </div>
                         </div>
                     </li>
@@ -34,6 +34,10 @@
                 </ul>
             </div>
         </section>
+    {% else %}
+    <section class="main-container fairs-manager-container">
+        <p>No has publicado ningún evento o feria todavia.</p>
+    </section>
     {% endif %}
     {% if favorites %}
         <section class="main-container fairs-manager-container" id="favorite_fairs">
@@ -56,6 +60,33 @@
                     {% endfor %}
                 </ul>
             </div>
+        </section>
+    {% endif %}
+    {% if fairs_registration %}
+        <section class="main-container fairs-manager-container">
+            <h1>Ferias a las que te has inscrito</h1>
+            <div class="optionSelect">
+                <ul class="fairs-list">
+                    {% for fair_register in fairs_registration %}
+                    <li>
+                        <div class="single-fair">
+                            <img src="{{ fair_register.fair.image.url }}" alt="Imagen del evento">
+                            <div>
+                                <h2>{{ fair_register.fair.title }}</h2>
+                                <p>{{fair_register.fair.city}} - {{ fair_register.fair.department }}</p>
+                            </div>
+                            <div>
+                                <button class="btn-secondary" onclick="window.location.href='{% url 'successful_inscription' fair_register.id fair_register.fair.title %}'">Ver QR</button>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        {% else %}
+        <section class="main-container fairs-manager-container">
+            <p>No te has inscrito a ninguna feria todavia.</p>
         </section>
     {% endif %}
 </div>

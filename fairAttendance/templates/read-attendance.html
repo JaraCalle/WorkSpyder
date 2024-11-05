@@ -1,4 +1,26 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/detail-fair.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+{% endblock links %}
+
 {% block content %}
-{{ qr }}
+<div class="event-card-container flex">
+    <div class="event-card form-container" id="qr-container">
+        <h1>Entrada autorizada a:</h1>
+        <h2>{{ inscrito }}</h2>
+        <h3>Para la convención:</h3>
+        <h2>{{ feria }}</h2>
+        <p class="disclaimer-p">¡Bienvenido!</p>
+        <div>
+            <button class="btn-secondary">
+                <a href="{% url 'post:view_registered_fair' feria.id %}">Ver todos los asistentes</a>
+            </button>
+        </div>
+    </div>
+</div>
 {% endblock content %}

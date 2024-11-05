@@ -16,7 +16,7 @@
         <img class="user-img" src="https://www.gravatar.com/avatar/{{ user.avatar }}?d=retro&f=y&s=128" alt="User Avatar">
         <h2>{{ aspirant }}</h2>
         <p>{{ aspirant.phone }}</p>
-        <button class="btn-primary" onclick="window.location.href='{% url 'profile:edit_profile' %}'">Editar perfil</button>
+        <button class="btn-secondary" onclick="window.location.href='{% url 'profile:edit_profile' %}'">Editar perfil</button>
     </section>
     <div class="fairs-data-container">
         <h2>Ferias a las que te inscribiste</h2>
@@ -31,6 +31,7 @@
                         <h1>{{ fair_registration.fair.title }}</h1>
                         <p>{{ fair_registration.fair.event_date|date:"d M Y" }}</p>
                         <button class="btn-primary" onclick="window.location.href='{% url 'fair' fair_registration.fair.id %}'">Ver feria</button>
+                        <button class="btn-secondary" onclick="window.location.href='{% url 'successful_inscription' fair_registration.id fair_registration.fair.title %}'">Ver QR</button>
                     </div>
                 </div>
             {% empty %}

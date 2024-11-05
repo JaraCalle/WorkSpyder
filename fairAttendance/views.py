@@ -24,6 +24,7 @@ def readQR(request, qr_id):
     qr = get_object_or_404(QR, id=qr_id)
     registro = qr.registration
     
+    inscrito = registro.aspirant
     feria = registro.fair
     organizador = feria.organizer
     
@@ -33,4 +34,4 @@ def readQR(request, qr_id):
 
     qr.set_as_read()
 
-    return render(request, 'read-attendance.html', {'qr': qr})
+    return render(request, 'read-attendance.html', {'feria': feria, 'inscrito': inscrito})

@@ -3,12 +3,28 @@
 {% load static %}
 
 {% block links %}
+    <link rel="stylesheet" href="{% static 'css/fairs-manager.css' %}">
+	<link rel="stylesheet" href="{% static 'css/principal-content.css' %}">
+	<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock links %}
 
+{% block title %}WorkSpyder - Editar perfil{% endblock title %}
+
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn-primary">Guardar</button>
-</form>
+<div class="principal-content-container">
+    <section class="main-container form-container" id="create-fair-form">
+		<h1>Editando perfil</h1>
+		<div>
+			<form method="post" enctype="multipart/form-data">
+				<div>
+					{% csrf_token %}
+					{{ form.as_p }}
+				</div>
+				<button type="submit" class="btn-primary">Guardar cambios</button>
+			</form>
+		</div>
+	</section>
+</div>
 {% endblock %}

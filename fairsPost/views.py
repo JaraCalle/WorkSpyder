@@ -46,7 +46,8 @@ def view_published_fairs(request):
     ferias = JobFair.objects.filter(organizer=request.user)
     aspirant = get_object_or_404(Aspirant, user=request.user)
     favorites = FairFavorite.objects.filter(aspirant=aspirant)
-    return render(request, "published_fairs.html", {'ferias': ferias, 'favorites': favorites})
+    fairs_registration = FairRegistration.objects.filter(aspirant = aspirant)
+    return render(request, "published_fairs.html", {'ferias': ferias, 'favorites': favorites, 'fairs_registration': fairs_registration})
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def view_registered_fair(request, id):

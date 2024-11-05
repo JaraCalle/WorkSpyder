@@ -54,3 +54,24 @@
     border-radius: 15px;
     object-fit: cover;
 }
+
+/* Estilo general del contenedor principal */
+#my-fairs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales para pantallas grandes */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Para centrar el tercer elemento en la fila de abajo en pantallas grandes */
+#my-fairs-container > *:nth-child(3) {
+    grid-column: 1 / -1; /* Hace que el tercer contenedor ocupe toda la fila */
+    justify-self: center; /* Lo centra horizontalmente */
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    #my-fairs-container {
+        grid-template-columns: 1fr; /* Cambia a una columna */
+    }
+}
