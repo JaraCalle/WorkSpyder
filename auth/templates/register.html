@@ -23,7 +23,8 @@
             </div>
             {% endfor%}
         {% endif %}
-        <p class="disclaimer-p">¿Ya tienes una cuenta? Haz click <a href="{% url "auth:login" %}">Aquí</a></p>
+        <p class="disclaimer-p">Si ya tienes cuenta, inicia sesión acá</p>
+        <a href="{% url "auth:login" %}"><button type="submit" id="submit" class="btn-secondary">Iniciar Sesión</button></a>
     </div>
 </div>
 

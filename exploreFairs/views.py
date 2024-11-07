@@ -4,7 +4,7 @@ from django.urls import reverse
 from .models import JobFair
 from .utils import is_aspirant_data_empty
 from fairManagement.models import Aspirant
-from django.db.models import Q
+from django.db.models import Q, F
 
 def view_fairs(request):
     # Obtener los filtros de la solicitud
@@ -17,17 +17,25 @@ def view_fairs(request):
     fairs = JobFair.objects.all()
 
     if location:
-        fairs = fairs.filter(location__icontains=location)
+        fairs = fairs.filter(
+            Q(department__icontains=location) | 
+            Q(city__icontains=location) | 
+            Q(direction__icontains=location)
+        )
     if event_date:
-        fairs = fairs.filter(event_date=event_date)
+        event_date = request.GET.get('event_date')
+    if event_date:
+        fairs = fairs.filter(
+            Q(start_event_date__lte=event_date) & Q(end_event_date__gte=event_date)
+        )
     if organizer:
-        fairs = fairs.filter(organizer__username__icontains=organizer)
+        fairs = fairs.filter(organizer__email__icontains=organizer)
     if title:
         fairs = fairs.filter(title__icontains=title)  # Filtro por título
 
     return render(request, 'fairs.html', {'fairs': fairs})
 
-@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:register')
 def fair_detail_view(request, id):
     fair = get_object_or_404(JobFair, id=id)
     aspirant = None

@@ -25,8 +25,10 @@
                                 <h2>{{ fair.title }}</h2>
                                 <p>{{fair.city}} - {{ fair.department }}</p>
                             </div>
-                            <div>
+                            <div style="display: flex; flex-direction: column;">
                                 <button class="btn-secondary" onclick="window.location.href='{% url 'post:view_registered_fair' fair.id %}'">Ver inscritos</button>
+                                <button class="btn-primary" onclick="window.location.href='{% url 'post:edit_selected_fair' fair.id %}'">Editar</button>
+                                <button class="btn-danger" onclick="window.location.href='{% url 'post:delete_selected_fair' fair.id %}'">Eliminar</button>
                             </div>
                         </div>
                     </li>

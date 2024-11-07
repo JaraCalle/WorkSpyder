@@ -37,7 +37,8 @@
 			<button type="submit" class="btn-secondary">Seleccionar Feria</button>
 		</section>
 	</form>
-    <section class="main-container form-container" id="edit-fair-form">
+	{% if form %}
+	<section class="main-container form-container" id="edit-fair-form">
 		<h1>Editar una feria</h1>
 		<div>
 			<form method="post" enctype="multipart/form-data">
@@ -45,9 +46,42 @@
 					{% csrf_token %}
 					{{ form.as_p }}
 				</div>
+				<!-- Contenedor para la previsualización de la imagen -->
+				<div id="image-preview-container" style="margin-top: 15px; display:flex; justify-content:center;">
+					<img 
+						id="image-preview" 
+						src="{{ form.instance.image.url }}" 
+						alt="Previsualización de la imagen" 
+						style="display: {{ form.instance.image }}; max-width: 100%; height: auto; border-radius: 15px; padding: 5px;"
+					>
+				</div>
 				<button type="submit" class="btn-primary">¡Publicar!</button>
 			</form>
 		</div>
 	</section>
+	{% endif %}
 </div>
 {% endblock content %}
+
+{% block script %}
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const imageInput = document.querySelector('input[type="file"]');
+			const imagePreview = document.getElementById('image-preview');
+
+			imageInput.addEventListener('change', function () {
+				const file = imageInput.files[0];
+				if (file) {
+					const reader = new FileReader();
+					reader.onload = function (e) {
+						imagePreview.src = e.target.result;
+						imagePreview.style.display = 'block';
+					};
+					reader.readAsDataURL(file);
+				} else {
+					imagePreview.style.display = 'none';
+				}
+			});
+		});
+	</script>
+{% endblock script %}

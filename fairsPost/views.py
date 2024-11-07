@@ -4,6 +4,7 @@ from exploreFairs.models import JobFair
 from fairManagement.models import FairRegistration, FairFavorite, Aspirant
 from fairAttendance.models import QR
 from .forms import FeriaForm
+import os
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def post_home_view(request):
@@ -26,18 +27,25 @@ def add_fair_view(request):
 def edit_fair_view(request, feria_id=None):
     if feria_id:
         feria = get_object_or_404(JobFair, id=feria_id)
+        if feria.organizer != request.user:
+            return redirect('auth:login')
     else:
         feria = None
+
     if request.method == 'POST':
         if 'selected_fair' in request.POST:
             feria_id = request.POST.get('selected_fair')
             return redirect('post:edit_selected_fair', feria_id=feria_id)
         form = FeriaForm(request.POST, request.FILES, instance=feria)
+
         if form.is_valid():
             form.save()
             return redirect('post:edit_fair')
-    else:
+    if feria:
         form = FeriaForm(instance=feria)
+    else:
+        form = None
+
     ferias = JobFair.objects.filter(organizer=request.user)
     return render(request, 'editfair.html', {'form': form, 'ferias': ferias, 'selected_feria': feria})
 
@@ -54,3 +62,18 @@ def view_registered_fair(request, id):
     fair = get_object_or_404(JobFair, id=id)
     qrs = QR.objects.filter(registration__fair=fair)
     return render(request, 'registered_fair.html', {'fair': fair, 'registers': qrs})
+
+@user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
+def delete_selected_fair(request, feria_id):
+    feria = get_object_or_404(JobFair, id=feria_id)
+    if feria.organizer != request.user:
+        return redirect('exploreFairs:view_fairs')
+    
+    if feria.image:
+        image_path = feria.image.path
+        # Verificar si la imagen existe en el sistema de archivos y eliminarla
+        if os.path.exists(image_path):
+            os.remove(image_path)
+    
+    feria.delete()
+    return redirect('post:view_published_fairs')

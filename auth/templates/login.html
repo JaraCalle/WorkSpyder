@@ -16,7 +16,8 @@
         
             <button type="submit" id="submit" class="btn-primary">Iniciar sesión</button>
         </form>
-        <p class="disclaimer-p">¿No tienes una cuenta? Haz click <a href="{% url "auth:register" %}">Aquí</a> y crea una</p>
+        <p class="disclaimer-p">Si no tienes cuenta, registrate acá</p>
+        <a href="{% url "auth:register" %}"><button type="submit" id="submit" class="btn-secondary">Registrarse</button></a>
     </div>
 </div>
 {% endblock content %}
