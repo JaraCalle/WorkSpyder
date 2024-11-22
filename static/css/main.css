@@ -27,7 +27,8 @@
 
 body {
     background-color: var(--bg-color);
-    overscroll-behavior: none;
+    -ms-scroll-chaining: none;
+        overscroll-behavior: none;
 }
 
 main {
@@ -159,7 +160,6 @@ main {
 
 .btn-primary:hover:after {
     transform: skewX(-45deg) scale(1, 1);
-    -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
 
@@ -197,7 +197,6 @@ main {
 
 .btn-secondary:hover:after {
     transform: skewX(-45deg) scale(1, 1);
-    -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
 
@@ -234,7 +233,6 @@ main {
 
 .btn-danger:hover:after {
     transform: skewX(-45deg) scale(1, 1);
-    -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
 
