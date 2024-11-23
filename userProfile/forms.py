@@ -21,7 +21,7 @@ class AspirantForm(forms.ModelForm):
     phone = forms.CharField(
         label="",
         required=False,
-        widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Número de celular'})
+        widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Número de celular', 'type': 'number', 'minlength':"10", 'maxlength':"10"})
     )
 
     class Meta:
