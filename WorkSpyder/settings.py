@@ -133,4 +133,4 @@ LOGIN_REDIRECT_URL = 'view_fairs'
 AUTH_USER_MODEL = 'custom_auth.CustomUser'
 
 #Acá se ubicará la dirección de donde el servidor se ejecúte en el momento
-SERVER_IP = 'work-spyder.vercel.app'
+SERVER_IP = 'workspyder.vercel.app'
