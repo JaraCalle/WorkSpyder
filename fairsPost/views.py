@@ -3,7 +3,10 @@ from django.contrib.auth.decorators import user_passes_test
 from exploreFairs.models import JobFair
 from fairManagement.models import FairRegistration, FairFavorite, Aspirant
 from fairAttendance.models import QR
+from .CONST import IMGBB_API_URL
+from decouple import config
 from .forms import FeriaForm
+import requests
 import os
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
@@ -13,14 +16,42 @@ def post_home_view(request):
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def add_fair_view(request):
     if request.method == 'POST':
-        form = FeriaForm(request.POST, request.FILES)
+        form = FeriaForm(request.POST, request.FILES)  # Manejar datos y archivos
         if form.is_valid():
-            fair = form.save(commit=False)
-            fair.organizer = request.user
-            fair.save()
-            return redirect('view_fairs')
+            image_file = request.FILES.get('image')  # Obtener el archivo de la imagen
+            
+            # Subir el archivo a ImgBB
+            try:
+                response = requests.post(
+                    IMGBB_API_URL,
+                    data={'key': config('IMGBB_API_KEY')},
+                    files={
+                        'image': (image_file.name, image_file.file, image_file.content_type)
+                    }
+                )
+                response_data = response.json()
+                
+                if response.status_code == 200:
+                    # Obtener la URL de la imagen subida
+                    img_url = response_data['data']['url']
+                    
+                    # Guardar la feria en la base de datos
+                    fair = form.save(commit=False)  # No guardar todavía
+                    fair.organizer = request.user
+                    fair.image = img_url  # Asignar la URL
+                    fair.save()  # Guardar en la base de datos
+
+                    return redirect('view_fairs')
+                else:
+                    # Error al subir a ImgBB
+                    form.add_error('image', f"Error al subir la imagen: {response_data.get('error', {}).get('message', 'Desconocido')}")
+            
+            except requests.RequestException as e:
+                # Error al realizar la solicitud a ImgBB
+                form.add_error('image', f"Error al subir la imagen: {str(e)}")
     else:
         form = FeriaForm()
+    
     return render(request, 'addfair.html', {'form': form})
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')

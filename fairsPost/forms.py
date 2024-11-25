@@ -53,7 +53,7 @@ class FeriaForm(forms.ModelForm):
         label="",
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Orador principal'})
     )
-    image = forms.ImageField(
+    image = forms.URLField(
         label="",
         widget=forms.ClearableFileInput(attrs={'class': 'form-input'})
     )

@@ -1,3 +1,5 @@
+IMGBB_API_URL = "https://api.imgbb.com/1/upload"
+
 DEPARTAMENTOS = [
         ('Amazonas', 'Amazonas'),
         ('Antioquía', 'Antioquía'),

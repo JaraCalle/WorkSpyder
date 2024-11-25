@@ -24,8 +24,7 @@
             {% for fair_registration in fairs_registration %}
                 <div class="card-fair" id="card-fair-profile">
                     <div class="img-card-container">
-                        <!-- Usa fair.image.url para acceder a la URL de la imagen cargada -->
-                        <img src="{{ fair_registration.fair.image.url }}" alt="{{ fair_registration.fair.title }}">
+                        <img src="{{ fair_registration.fair.image }}" alt="{{ fair_registration.fair.title }}">
                     </div>
                     <div class="data-card-container">
                         <h1>{{ fair_registration.fair.title }}</h1>

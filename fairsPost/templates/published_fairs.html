@@ -20,7 +20,7 @@
                     {% for fair in ferias %}
                     <li>
                         <div class="single-fair">
-                            <img src="{{ fair.image.url }}" alt="Imagen del evento">
+                            <img src="{{ fair.image }}" alt="Imagen del evento">
                             <div>
                                 <h2>{{ fair.title }}</h2>
                                 <p>{{fair.city}} - {{ fair.department }}</p>
@@ -49,7 +49,7 @@
                     {% for favorite in favorites %}
                     <li>
                         <div class="single-fair">
-                            <img src="{{ favorite.fair.image.url }}" alt="Imagen del evento">
+                            <img src="{{ favorite.fair.image }}" alt="Imagen del evento">
                             <div>
                                 <h2>{{ favorite.fair.title }}</h2>
                                 <p>{{favorite.fair.city}} - {{ favorite.fair.department }}</p>
@@ -72,7 +72,7 @@
                     {% for fair_register in fairs_registration %}
                     <li>
                         <div class="single-fair">
-                            <img src="{{ fair_register.fair.image.url }}" alt="Imagen del evento">
+                            <img src="{{ fair_register.fair.image }}" alt="Imagen del evento">
                             <div>
                                 <h2>{{ fair_register.fair.title }}</h2>
                                 <p>{{fair_register.fair.city}} - {{ fair_register.fair.department }}</p>

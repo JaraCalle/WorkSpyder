@@ -22,7 +22,7 @@
 			<div>
 				<div class="card-fair">
 					<div class="img-card-container">
-						<img src="{{ feria.image.url }}" alt="{{ fair.title }}">
+						<img src="{{ feria.image }}" alt="{{ fair.title }}">
 					</div>
 					<div class="data-card-container">
 						<h1>{{ feria.title }}</h1>
@@ -50,7 +50,7 @@
 				<div id="image-preview-container" style="margin-top: 15px; display:flex; justify-content:center;">
 					<img 
 						id="image-preview" 
-						src="{{ form.instance.image.url }}" 
+						src="{{ form.instance.image }}" 
 						alt="Previsualización de la imagen" 
 						style="display: {{ form.instance.image }}; max-width: 100%; height: auto; border-radius: 15px; padding: 5px;"
 					>

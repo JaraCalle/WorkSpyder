@@ -53,8 +53,7 @@
         {% for fair in fairs %}
             <div class="card-fair">
                 <div class="img-card-container">
-                    <!-- Usa fair.image.url para acceder a la URL de la imagen cargada -->
-                    <img src="{{ fair.image.url }}" alt="{{ fair.title }}">
+                    <img src="{{ fair.image }}" alt="{{ fair.title }}">
                 </div>
                 <div class="data-card-container">
                     <h1>{{ fair.title }}</h1>
