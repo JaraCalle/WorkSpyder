@@ -3,6 +3,7 @@ from .models import QR
 from django.contrib.auth.decorators import user_passes_test
 from fairManagement.models import FairRegistration
 from WorkSpyder.settings import SERVER_IP
+from urllib.parse import unquote
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def generateQR(request, registration_id, fair_title):
@@ -17,7 +18,7 @@ def generateQR(request, registration_id, fair_title):
 
     qr_url = f"http://{ SERVER_IP }/attendance/read-attendance/{ qr.id }"
     
-    return render(request, 'successful-inscription.html', {'registration_id': registration_id, 'fair_title': fair_title, 'qr_url': qr_url})
+    return render(request, 'successful-inscription.html', {'registration_id': registration_id, 'fair_title': unquote(fair_title), 'qr_url': qr_url})
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def readQR(request, qr_id):
