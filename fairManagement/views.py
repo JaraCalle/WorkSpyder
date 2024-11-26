@@ -39,7 +39,7 @@ def favorite_fair(request):
             favorite = FairFavorite(aspirant=aspirant, fair=fair, favoriteDate=timezone.now().date())
             favorite.save()
 
-        return redirect("view_fairs")
+        return redirect("fair", fair_id)
 
 
 def error_inscripcion(request, message):

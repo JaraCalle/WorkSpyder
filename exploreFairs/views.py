@@ -4,6 +4,7 @@ from django.urls import reverse
 from .models import JobFair
 from .utils import is_aspirant_data_empty
 from fairManagement.models import Aspirant
+from fairManagement.models import FairRegistration
 from django.db.models import Q, F
 
 def view_fairs(request):
@@ -50,4 +51,10 @@ def fair_detail_view(request, id):
     if is_aspirant_data_empty(aspirant):
         return HttpResponseRedirect(reverse('profile:edit_profile') + '?next=' + request.path)
     
-    return render(request, 'detail-fair.html', {'fair': fair, 'aspirant': aspirant})
+    if FairRegistration.objects.filter(aspirant=aspirant, fair=fair).exists():
+        fair_registration = FairRegistration.objects.get(aspirant=aspirant, fair=fair)
+    else:
+        fair_registration = None
+    
+    
+    return render(request, 'detail-fair.html', {'fair': fair, 'aspirant': aspirant, 'fair_registration': fair_registration})
