@@ -100,11 +100,5 @@ def delete_selected_fair(request, feria_id):
     if feria.organizer != request.user:
         return redirect('exploreFairs:view_fairs')
     
-    if feria.image:
-        image_path = feria.image.path
-        # Verificar si la imagen existe en el sistema de archivos y eliminarla
-        if os.path.exists(image_path):
-            os.remove(image_path)
-    
     feria.delete()
     return redirect('post:view_published_fairs')
