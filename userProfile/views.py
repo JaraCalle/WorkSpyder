@@ -25,16 +25,6 @@ def edit_profile(request):
         form = AspirantForm(request.POST, instance=aspirant_user)
         if form.is_valid():
             form.save()
-            """
-            # Si fair_id está presente, agregarlo a la URL de redirección
-            if fair_id:
-                # Verificar si next_url ya tiene parámetros
-                if '?' in next_url:
-                    next_url += f"&fair_id={fair_id}"
-                else:
-                    next_url += f"?fair_id={fair_id}"
-            # Redirigir a la página previa (next_url) después de guardar el formulario
-            """
             return redirect(next_url, fair_id)
 
     return render(request, 'edit_profile.html', {'form': form})
