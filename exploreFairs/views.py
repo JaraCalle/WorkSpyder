@@ -1,11 +1,9 @@
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
-from django.urls import reverse
 from .models import JobFair
-from .utils import is_aspirant_data_empty
 from fairManagement.models import Aspirant
 from fairManagement.models import FairRegistration
-from django.db.models import Q, F
+from django.db.models import Q
 
 def view_fairs(request):
     # Obtener los filtros de la solicitud
@@ -36,25 +34,17 @@ def view_fairs(request):
 
     return render(request, 'fairs.html', {'fairs': fairs})
 
-@user_passes_test(lambda u: u.is_authenticated, login_url='auth:register')
 def fair_detail_view(request, id):
     fair = get_object_or_404(JobFair, id=id)
-    aspirant = None
+    fair_registration = None
+
     if request.user.is_authenticated:
-        # Verifica si existe un Aspirant asociado al usuario autenticado
-        try:
-            aspirant = Aspirant.objects.get(user=request.user)
-        except Aspirant.DoesNotExist:
-            aspirant = None  # Si no existe, simplemente no asigna ningún aspirante
+        aspirant = Aspirant.objects.get(user=request.user)
+
+    try:
+        if FairRegistration.objects.filter(aspirant=aspirant, fair=fair).exists():
+            fair_registration = FairRegistration.objects.get(aspirant=aspirant, fair=fair)
+    except:
+        pass
     
-    # Si el aspirante no ha llenado la información del perfil (nombre y apellido) se le envia a llenarla
-    if is_aspirant_data_empty(aspirant):
-        return HttpResponseRedirect(reverse('profile:edit_profile') + '?next=' + request.path)
-    
-    if FairRegistration.objects.filter(aspirant=aspirant, fair=fair).exists():
-        fair_registration = FairRegistration.objects.get(aspirant=aspirant, fair=fair)
-    else:
-        fair_registration = None
-    
-    
-    return render(request, 'detail-fair.html', {'fair': fair, 'aspirant': aspirant, 'fair_registration': fair_registration})
+    return render(request, 'detail-fair.html', {'fair': fair, 'fair_registration': fair_registration})

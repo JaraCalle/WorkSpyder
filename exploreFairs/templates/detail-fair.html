@@ -52,7 +52,6 @@
       {% csrf_token %}
       <input type="hidden" name="fair_id" value="{{ fair.id }}">
       <input type="hidden" name="fair_title" value="{{ fair.title }}">
-      <input type="hidden" name="aspirant_id" value="{{ aspirant.id }}">
       <button class="btn-primary" type="submit">¡Inscribirme!</button>
     </form>
     {% endif %}

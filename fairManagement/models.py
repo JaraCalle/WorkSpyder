@@ -10,6 +10,9 @@ class Aspirant(models.Model):
     phone = models.CharField(max_length=10)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
 
+    def is_aspirant_data_empty(self) -> bool:
+        return self.firstName == "" or self.phone == ""
+
     def __str__(self):
         return f"{self.firstName} {self.secondName} {self.lastName}"
 
