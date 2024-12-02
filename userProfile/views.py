@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from fairManagement.models import Aspirant
 from fairManagement.models import FairRegistration
-from fairAttendance.models import QR
 from .forms import AspirantForm
 
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
@@ -17,8 +16,8 @@ def view_profile(request):
 def edit_profile(request):
     aspirant_user = get_object_or_404(Aspirant, user=request.user)
     
-    # Obtener la URL previa (next) desde los parámetros GET
     next_url = request.GET.get('next', reverse('profile:view_profile'))
+    fair_id = request.GET.get('fair_id', '')
     
     if request.method == 'GET':
         form = AspirantForm(instance=aspirant_user)
@@ -26,7 +25,16 @@ def edit_profile(request):
         form = AspirantForm(request.POST, instance=aspirant_user)
         if form.is_valid():
             form.save()
+            """
+            # Si fair_id está presente, agregarlo a la URL de redirección
+            if fair_id:
+                # Verificar si next_url ya tiene parámetros
+                if '?' in next_url:
+                    next_url += f"&fair_id={fair_id}"
+                else:
+                    next_url += f"?fair_id={fair_id}"
             # Redirigir a la página previa (next_url) después de guardar el formulario
-            return redirect(next_url)
+            """
+            return redirect(next_url, fair_id)
 
     return render(request, 'edit_profile.html', {'form': form})

@@ -6,7 +6,7 @@ from .views import register_fair, error_inscripcion, favorite_fair
 app_name = 'management'
 
 urlpatterns = [
-    path('', register_fair, name='register_fair'),
+    path('<int:fair_id_>', register_fair, name='register_fair'),
     path('error-inscripcion/<str:message>/', error_inscripcion, name='error_inscripcion'),
     path('favorite-fair', favorite_fair, name='favorite_fair'),
 ]

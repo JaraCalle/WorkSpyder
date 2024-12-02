@@ -48,10 +48,9 @@
       <button class="btn-primary" type="submit">Ver mi QR</button>
     </form>
     {% else %}
-    <form class="event-button" method="post" action="{% url 'management:register_fair' %}">
+    <form class="event-button" method="post" action="{% url 'management:register_fair' fair.id %}">
       {% csrf_token %}
       <input type="hidden" name="fair_id" value="{{ fair.id }}">
-      <input type="hidden" name="fair_title" value="{{ fair.title }}">
       <button class="btn-primary" type="submit">¡Inscribirme!</button>
     </form>
     {% endif %}

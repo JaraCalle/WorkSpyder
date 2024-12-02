@@ -1,17 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.urls import reverse
+from django.shortcuts import render, redirect
 from .models import *
+from .utils import user_passes_test_with_param
 from exploreFairs.models import JobFair
 from django.utils import timezone
 from django.contrib.auth.decorators import user_passes_test
 
-
-@user_passes_test(lambda u: u.is_authenticated, login_url='auth:register')
-def register_fair(request):
-    # Si no es POST, mostrar el formulario de inscripción o manejar otro caso
-    if request.method != "POST":
-        return redirect('error_inscripcion', message='Ocurrió un error en la inscripción.')
-
+@user_passes_test_with_param(lambda u: u.is_authenticated, param_name='fair_id', login_url='auth:register')
+def register_fair(request, fair_id_):
     aspirant = None
 
     try:
@@ -19,11 +14,11 @@ def register_fair(request):
     except Aspirant.DoesNotExist:
         aspirant = None  # Si no existe un aspirante, simplemente no asigna ningún aspirante ¡OJO DEBERIA HABER UN MESSAGE!
 
-    # Si el aspirante no ha llenado la información del perfil (nombre y apellido) se le envia a llenarla
-    if aspirant.is_aspirant_data_empty():
-        return HttpResponseRedirect(reverse('profile:edit_profile') + '?next=' + request.path)
+    if request.POST.get('fair_id'):
+        fair_id = request.POST.get('fair_id')
+    else:
+        fair_id = fair_id_
 
-    fair_id = request.POST.get('fair_id')
     fair = JobFair.objects.get(id=fair_id)
 
     # Si el aspirante ya se encuentra inscrito
