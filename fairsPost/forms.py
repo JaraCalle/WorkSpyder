@@ -43,13 +43,20 @@ class FeriaForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Dirección'})
     )
     start_hour = forms.TimeField(
-        label="",
+        label="Hora de inicio",
         widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'time', 'placeholder': 'Hora de inicio'})
     )
     end_hour = forms.TimeField(
-        label="",
+        label="Hora de cierre",
         widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'time', 'placeholder': 'Hora de cierre'})
     )
+
+    connection_link = forms.CharField(
+        label="",
+        widget=forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'Link de conexión virtual (Opcional)'})
+    )
+
+
     keynote_speaker = forms.CharField(
         label="",
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Orador principal'})
@@ -62,7 +69,7 @@ class FeriaForm(forms.ModelForm):
             'end_event_date', 'start_hour', 'end_hour',
             'department', 'city', 'direction',
             'maximum_capacity', 'is_visible',
-            'keynote_speaker'
+            'keynote_speaker', 'connection_link'
         ]
 
     def __init__(self, *args, **kwargs):

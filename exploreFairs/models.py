@@ -19,6 +19,7 @@ class JobFair(models.Model):
     is_visible = models.BooleanField(default=True)
     direction = models.CharField(max_length=255)
     keynote_speaker = models.CharField(max_length=255)
+    connection_link = models.URLField(blank=True, null=True)
     image = models.URLField(blank=True, null=True)
 
     def quota_disponibility(self) -> int:
