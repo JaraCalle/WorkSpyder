@@ -53,11 +53,31 @@
         {% for fair in fairs %}
             <div class="card-fair">
                 <div class="img-card-container">
+                    <div class="background-gradient"></div>
+                    {% if fair.get_availability_ratio >= 1 %}
+                        <div class="disponibility">
+                            <div style="background-color: #DD2E44;"></div>
+                            <h2>Agotado</h2>
+                        </div>
+                    {% elif fair.get_availability_ratio >= 0.6 %}
+                        <div class="disponibility">
+                            <div style="background-color: #F4900C;"></div>
+                            <h2>Agotandose</h2>
+                        </div>
+                    {% else %}
+                        <div class="disponibility">
+                            <div style="background-color: #78B159;"></div>
+                            <h2>Disponible</h2>
+                        </div>
+                    {% endif %}
+                    <div class="fair-date">
+                        <h2>{{ fair.start_event_date }}</h2>
+                    </div>
                     <img src="{{ fair.image }}" alt="{{ fair.title }}">
                 </div>
                 <div class="data-card-container">
                     <h1>{{ fair.title }}</h1>
-                    <p>{{ fair.event_date|date:"d M Y" }}</p>
+                    <p>{{ fair.city }}</p>
                     <button class="btn-primary" onclick="window.location.href='{% url 'fair' fair.id %}'">Ver más info</button>
                 </div>
             </div>

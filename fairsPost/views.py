@@ -16,7 +16,8 @@ def post_home_view(request):
 @user_passes_test(lambda u: u.is_authenticated, login_url='auth:login')
 def add_fair_view(request):
     if request.method == 'POST':
-        form = FeriaForm(request.POST, request.FILES)  # Manejar datos y archivos
+        print(request.FILES)
+        form = FeriaForm(request.POST)  # Manejar datos y archivos
         if form.is_valid():
             image_file = request.FILES.get('image')  # Obtener el archivo de la imagen
             

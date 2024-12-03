@@ -28,7 +28,8 @@
     height: auto; /* Mantiene la proporción de la imagen */
     max-width: 300px;
     border-radius: 10px;
-    object-fit: cover; /* Asegura que la imagen llene el espacio sin distorsionar */
+    -o-object-fit: cover;
+       object-fit: cover; /* Asegura que la imagen llene el espacio sin distorsionar */
 }
 
 .event-right {
