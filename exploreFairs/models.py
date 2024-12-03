@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.timezone import now
 from django.core.exceptions import ValidationError
+from fairManagement.models import FairRegistration
 
 class JobFair(models.Model):
     organizer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='job_fairs', null=True)
@@ -14,10 +15,17 @@ class JobFair(models.Model):
     start_hour = models.TimeField(auto_now=False, auto_now_add=False)
     end_hour = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     maximum_capacity = models.IntegerField(null=True)
+    number_of_registered = models.IntegerField(default=0)
     is_visible = models.BooleanField(default=True)
     direction = models.CharField(max_length=255)
     keynote_speaker = models.CharField(max_length=255)
     image = models.URLField(blank=True, null=True)
+
+    def update_number_of_registered(self):
+        """Actualizar el número de participantes registrados"""
+        self.number_of_registered = FairRegistration.objects.filter(fair=self).count()
+        self.save(update_fields=['number_of_registered'])
+
 
     def clean(self):
         # Verificar si la fecha de inicio es mayor que la fecha actual

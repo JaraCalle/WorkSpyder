@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
-from exploreFairs.models import JobFair
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 
 class Aspirant(models.Model):
     id = models.AutoField(primary_key = True)
@@ -28,10 +28,26 @@ class Aspirant(models.Model):
 
 
 class FairRegistration(models.Model):
-    id = models.AutoField(primary_key = True)
+    id = models.AutoField(primary_key=True)
     aspirant = models.ForeignKey(Aspirant, on_delete=models.CASCADE)
-    fair = models.ForeignKey(JobFair, on_delete=models.CASCADE)
+    fair = models.ForeignKey('exploreFairs.JobFair', on_delete=models.CASCADE)
     registrationDate = models.DateField()
+
+    def clean(self):
+        if not self.fair.maximum_capacity:
+            return
+        
+        if self.fair.number_of_registered >= self.fair.maximum_capacity:
+            raise ValidationError("No se pueden agregar más participantes, el aforo máximo ha sido alcanzado.")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+        self.fair.update_number_of_registered()
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        self.fair.update_number_of_registered()
 
     def __str__(self):
         return f"{self.aspirant} {self.fair}"
@@ -39,5 +55,5 @@ class FairRegistration(models.Model):
 class FairFavorite(models.Model):
     id = models.AutoField(primary_key=True)
     aspirant = models.ForeignKey(Aspirant, on_delete=models.CASCADE)
-    fair = models.ForeignKey(JobFair, on_delete=models.CASCADE)
+    fair = models.ForeignKey('exploreFairs.JobFair', on_delete=models.CASCADE)
     favoriteDate = models.DateField()
