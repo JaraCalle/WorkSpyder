@@ -160,7 +160,6 @@ ul {
 }
 .option-input:checked::after {
   -webkit-animation: click-wave 0.65s;
-  -moz-animation: click-wave 0.65s;
   animation: click-wave 0.65s;
   background: var(--active-btn-color);
   content: '';
@@ -173,6 +172,22 @@ ul {
 }
 .option-input.radio::after {
   border-radius: 50%;
+}
+
+@-webkit-keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
 }
 
 @keyframes click-wave {

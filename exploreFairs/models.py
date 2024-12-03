@@ -21,12 +21,16 @@ class JobFair(models.Model):
     keynote_speaker = models.CharField(max_length=255)
     image = models.URLField(blank=True, null=True)
 
+    def quota_disponibility(self) -> int:
+        """Determina cuantos cupos quedan basado en la capacidad y los registros."""
+        if self.maximum_capacity:
+            quota = self.maximum_capacity - self.number_of_registered 
+            return quota
+
+
     def get_availability_ratio(self) -> float:
         """Determina el estado de disponibilidad basado en la capacidad y los registros."""
-        if self.maximum_capacity and self.maximum_capacity > 0:
-            if not self.maximum_capacity:
-                return 0
-            
+        if self.maximum_capacity and self.maximum_capacity > 0:            
             ratio = self.number_of_registered / self.maximum_capacity
             return ratio
 
