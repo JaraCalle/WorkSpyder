@@ -35,6 +35,9 @@
     <div class="event-footer">
       <div class="event-info">
         <p><span class="event-label">Organizado por:</span> {{ fair.organizer.email }}</p>
+        {% if fair.connection_link %}
+          <p><span class="event-label">Link de conexión:</span> <a href="{{ fair.connection_link }}" target="blank">{{ fair.connection_link }}</a></p>
+        {% endif %}
         <p><span class="event-label">Fecha: </span>Desde el {{ fair.start_event_date|date:"d M Y" }} hasta el {{ fair.end_event_date|date:"d M Y" }}</p>
         <p><span class="event-label">Hora: </span>Inicia a las {{ fair.start_hour }} finaliza a las {{ fair.end_hour }}</p>
         <p><span class="event-label">Ciudad:</span> {{fair.city}} - {{ fair.department }}</p>
