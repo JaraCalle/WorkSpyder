@@ -53,6 +53,14 @@
         {% for fair in fairs %}
             <div class="card-fair">
                 <div class="img-card-container">
+                    <div class="background-gradient"></div>
+                    <div class="disponibility">
+                        <div></div>
+                        <h2>Disponible</h2>
+                    </div>
+                    <div class="fair-date">
+                        <h2>{{ fair.start_event_date }}</h2>
+                    </div>
                     <img src="{{ fair.image }}" alt="{{ fair.title }}">
                 </div>
                 <div class="data-card-container">
