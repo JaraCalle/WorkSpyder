@@ -15,13 +15,23 @@ class JobFair(models.Model):
     start_hour = models.TimeField(auto_now=False, auto_now_add=False)
     end_hour = models.TimeField(auto_now=False, auto_now_add=False, null=True)
     maximum_capacity = models.IntegerField(null=True)
-    number_of_registered = models.IntegerField(default=0)
+    number_of_registered = models.IntegerField(default=0, null=True)
     is_visible = models.BooleanField(default=True)
     direction = models.CharField(max_length=255)
     keynote_speaker = models.CharField(max_length=255)
     image = models.URLField(blank=True, null=True)
 
-    def update_number_of_registered(self):
+    def get_availability_ratio(self) -> float:
+        """Determina el estado de disponibilidad basado en la capacidad y los registros."""
+        if self.maximum_capacity and self.maximum_capacity > 0:
+            if not self.maximum_capacity:
+                return 0
+            
+            ratio = self.number_of_registered / self.maximum_capacity
+            return ratio
+
+
+    def update_number_of_registered(self) -> None:
         """Actualizar el número de participantes registrados"""
         self.number_of_registered = FairRegistration.objects.filter(fair=self).count()
         self.save(update_fields=['number_of_registered'])

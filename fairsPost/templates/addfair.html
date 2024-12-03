@@ -22,6 +22,10 @@
 				<div>
 					{% csrf_token %}
 					{{ form.as_p }}
+					<p>	
+						<label>Imagen de la feria:</label>
+						<input type="file" name="image" class="form-input" accept="image/*">
+					</p>
 				</div>
 				<button type="submit" class="btn-primary">Agregar Feria</button>
 			</form>
