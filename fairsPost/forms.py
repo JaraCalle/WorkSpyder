@@ -24,14 +24,25 @@ class FeriaForm(forms.ModelForm):
 
     department = forms.ChoiceField(
         choices=DEPARTAMENTOS,
-        label="",
+        label="Departamento",
         widget=forms.Select(attrs={'class': 'form-input', 'id': 'usp-custom-departamento-de-residencia',})
     )
 
     city = forms.ChoiceField(
         choices=MUNICIPIOS,
-        label="",
+        label="Municipio",
         widget=forms.Select(attrs={'class': 'form-input', 'id': 'usp-custom-municipio-ciudad'})
+    )
+
+    maximum_capacity = forms.IntegerField(
+        label="",
+        widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Aforo máximo del evento', 'type': 'number', 'min': '1'})
+    )
+
+    is_visible = forms.BooleanField(
+        required=False,
+        label="¿Hacer visible para todos?",
+        widget=forms.CheckboxInput(attrs={'class': 'form-input'})
     )
 
     direction = forms.CharField(
@@ -60,6 +71,10 @@ class FeriaForm(forms.ModelForm):
 
     class Meta:
         model = JobFair
-        fields = ['title', 'description', 'start_event_date', 'end_event_date', 'start_hour', 'end_hour', 'department', 'city', 'direction', 'keynote_speaker', 'image']
+        fields = ['title', 'description', 'start_event_date', 
+                  'end_event_date', 'start_hour', 'end_hour', 
+                  'department', 'city', 'direction',
+                  'maximum_capacity', 'is_visible', 'keynote_speaker', 
+                  'image']
         help_texts = {k: "" for k in fields}
 
