@@ -31,6 +31,7 @@ class FeriaForm(forms.ModelForm):
     )
     maximum_capacity = forms.IntegerField(
         label="",
+        required=False,
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Aforo máximo del evento', 'type': 'number', 'min': '1'})
     )
     is_visible = forms.BooleanField(
@@ -53,11 +54,13 @@ class FeriaForm(forms.ModelForm):
     )
     end_hour = forms.TimeField(
         label="Hora de cierre",
+        required=False,
         widget=forms.DateInput(attrs={'class': 'form-input', 'type': 'time', 'placeholder': 'Hora de cierre'})
     )
 
     connection_link = forms.CharField(
         label="",
+        required=False,
         widget=forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'Link de conexión virtual (Opcional)'})
     )
 
@@ -68,6 +71,7 @@ class FeriaForm(forms.ModelForm):
 
     social_media = forms.CharField(
         label="",
+        required=False,
         widget=forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'Link de Instagram'})
     )
 
