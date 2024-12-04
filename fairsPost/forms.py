@@ -38,6 +38,11 @@ class FeriaForm(forms.ModelForm):
         label="¿Hacer visible para todos?",
         widget=forms.CheckboxInput(attrs={'class': 'form-input', 'default': 'check'})
     )
+    is_registrable = forms.BooleanField(
+        required=False,
+        label="Habilitar las inscripciones?",
+        widget=forms.CheckboxInput(attrs={'class': 'form-input', 'default': 'check'})
+    )
     direction = forms.CharField(
         label="",
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Dirección'})
@@ -56,10 +61,14 @@ class FeriaForm(forms.ModelForm):
         widget=forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'Link de conexión virtual (Opcional)'})
     )
 
-
     keynote_speaker = forms.CharField(
         label="",
         widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Orador principal'})
+    )
+
+    social_media = forms.CharField(
+        label="",
+        widget=forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'Link de Instagram'})
     )
 
     class Meta:
@@ -68,8 +77,8 @@ class FeriaForm(forms.ModelForm):
             'title', 'description', 'start_event_date',
             'end_event_date', 'start_hour', 'end_hour',
             'department', 'city', 'direction',
-            'maximum_capacity', 'is_visible',
-            'keynote_speaker', 'connection_link'
+            'maximum_capacity', 'is_visible', 'is_registrable',
+            'keynote_speaker', 'connection_link', 'social_media'
         ]
 
     def __init__(self, *args, **kwargs):

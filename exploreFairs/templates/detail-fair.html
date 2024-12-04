@@ -38,25 +38,38 @@
         {% if fair.connection_link %}
           <p><span class="event-label">Link de conexión:</span> <a href="{{ fair.connection_link }}" target="blank">{{ fair.connection_link }}</a></p>
         {% endif %}
-        <p><span class="event-label">Fecha: </span>Desde el {{ fair.start_event_date|date:"d M Y" }} hasta el {{ fair.end_event_date|date:"d M Y" }}</p>
-        <p><span class="event-label">Hora: </span>Inicia a las {{ fair.start_hour }} finaliza a las {{ fair.end_hour }}</p>
+        {% if fair.start_event_date == fair.end_event_date %}
+          <p><span class="event-label">Fecha: </span>{{ fair.start_event_date|date:"d M Y" }}</p>
+        {% else %}
+          <p><span class="event-label">Fecha: </span>Desde el {{ fair.start_event_date|date:"d M Y" }} hasta el {{ fair.end_event_date|date:"d M Y" }}</p>
+        {% endif %}
+        <p><span class="event-label">Hora: </span>{{ fair.start_hour }} - {{ fair.end_hour }}</p>
         <p><span class="event-label">Ciudad:</span> {{fair.city}} - {{ fair.department }}</p>
         <p><span class="event-label">Dirección:</span> {{fair.direction}}</p>
         <p><span class="event-label">Ponente principal:</span> {{ fair.keynote_speaker }}</p>
-        <p><span class="event-label">Número de personas inscritas:</span> {{ fair.number_of_registered }}</p>
+        {% if fair.social_media %}
+          <a href="{{ fair.social_media }}" target="blank" style="display: flex; justify-content: center; margin-top: 10px">
+            <image src="{% static 'images/Instagram-icon.svg' %}"/>
+          </a>
+        {% endif %}
+        {% if fair.is_registrable %}
+          <p><span class="event-label">Número de personas inscritas:</span> {{ fair.number_of_registered }}</p>
+        {% endif %}
       </div>
-    </div>  
+    </div>
     {% if fair_registration %}
     <form class="event-button" method="get" action="{% url 'successful_inscription' fair_registration.id fair.title %}">
       {% csrf_token %}
       <button class="btn-primary" type="submit">Ver mi QR</button>
     </form>
     {% else %}
-    <form class="event-button" method="post" action="{% url 'management:register_fair' fair.id %}">
-      {% csrf_token %}
-      <input type="hidden" name="fair_id" value="{{ fair.id }}">
-      <button class="btn-primary" type="submit">¡Inscribirme!</button>
-    </form>
+      {% if fair.is_registrable %}
+        <form class="event-button" method="post" action="{% url 'management:register_fair' fair.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="fair_id" value="{{ fair.id }}">
+          <button class="btn-primary" type="submit">¡Inscribirme!</button>
+        </form>
+      {% endif %}
     {% endif %}
   </div>
 </div>
